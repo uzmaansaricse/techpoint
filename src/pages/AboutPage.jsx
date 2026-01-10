@@ -108,9 +108,9 @@ const AboutPage = () => {
                     <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
 
                     <div className="relative z-10 max-w-3xl mx-auto">
-                        <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">Ready to make an impact?</h2>
+                        <h2 className="text-3xl md:text-5xl font-display font-bold mb-6 !text-white">Ready to make an impact?</h2>
 
-                        <p className="text-slate-300 mb-10 text-lg font-light leading-relaxed">
+                        <p className="text-slate-300/90 mb-10 text-lg font-light leading-relaxed">
                             Join a roster of successful brands that have elevated their digital presence with us.
                         </p>
 

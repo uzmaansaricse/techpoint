@@ -53,7 +53,7 @@ const Testimonials = () => {
                 <div className="max-w-4xl w-full relative">
 
                     {/* Decorative Quotes */}
-                    <Quote className="absolute top-0 left-0 text-gold/10 w-32 h-32 md:w-48 md:h-48 transform -translate-x-10 -translate-y-10" />
+
 
                     {/* Testimonial Card */}
                     <div className="relative bg-transparent p-4 md:p-8">
