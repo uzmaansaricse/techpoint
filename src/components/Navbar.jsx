@@ -52,7 +52,7 @@ const Navbar = () => {
 					</Link>
 
 					{/* Desktop Navigation */}
-					<div className="hidden md:block">
+					<div className="hidden lg:block">
 						<div className="ml-10 flex items-baseline space-x-10">
 							{navLinks.map((link) => (
 								<div key={link.name} className="relative group">
@@ -113,7 +113,7 @@ const Navbar = () => {
 					</div>
 
 					{/* CTA Button */}
-					<div className="hidden md:block">
+					<div className="hidden lg:block">
 						<Link to="/contact" className="relative px-8 py-3 bg-primary text-white text-xs font-bold tracking-widest uppercase overflow-hidden group">
 							<span className="relative z-10 transition-colors duration-300 group-hover:text-primary">Get Started</span>
 							<div className="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out"></div>
@@ -121,7 +121,7 @@ const Navbar = () => {
 					</div>
 
 					{/* Mobile menu button */}
-					<div className="md:hidden">
+					<div className="lg:hidden">
 						<button
 							onClick={() => setIsOpen(!isOpen)}
 							className="inline-flex items-center justify-center p-2 text-primary hover:text-accent focus:outline-none transition-colors"
@@ -133,7 +133,7 @@ const Navbar = () => {
 			</div>
 
 			{/* Mobile Menu */}
-			<div className={`md:hidden fixed inset-0 z-40 bg-white transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+			<div className={`lg:hidden fixed inset-0 z-40 bg-white transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
 				<div className="absolute top-5 right-5">
 					<button onClick={() => setIsOpen(false)} className="p-2 text-primary hover:text-accent">
 						<X className="w-8 h-8" />

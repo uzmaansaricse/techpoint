@@ -56,7 +56,7 @@ const servicesList = [
 
 const ServicesPage = () => {
     return (
-        <div className="pt-32 pb-24 bg-bg-light min-h-screen">
+        <div className="pt-32 pb-24 bg-bg-light min-h-screen overflow-x-hidden">
             <SEO title="Services" />
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
