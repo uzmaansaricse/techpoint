@@ -62,7 +62,7 @@ const ProcessFlow = () => {
                                 {/* Icon Container */}
                                 <div
                                     className="w-16 h-16 rounded-full border border-gold/30 bg-bg-light flex items-center justify-center mb-8
-                                    shadow-sm group-hover:shadow-gold group-hover:bg-primary group-hover:text-gold transition-all duration-500 relative z-10"
+                                    shadow-sm transition-all duration-500 relative z-10 group-hover:border-gold group-hover:text-gold group-hover:shadow-gold"
                                 >
                                     {step.icon}
                                 </div>

@@ -49,7 +49,7 @@ const WhyChooseMe = () => {
                         <div className="grid sm:grid-cols-2 gap-x-8 gap-y-10">
                             {features.map((feature, idx) => (
                                 <div key={idx} className="flex flex-col gap-3 group">
-                                    <div className="text-accent mb-2 group-hover:scale-110 transition-transform origin-left">
+                                    <div className="text-accent mb-2 group-hover:scale-110 group-hover:text-gold transition-all origin-left duration-300">
                                         {feature.icon}
                                     </div>
                                     <h4 className="font-display font-bold text-primary text-lg">

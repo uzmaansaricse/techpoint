@@ -61,22 +61,22 @@ const Career = () => {
 
                         {/* Card 1 */}
                         <div className="bg-white p-8 border border-gray-100 flex items-center gap-6 hover:border-gold/30 hover:shadow-lg transition-all duration-300 group text-left">
-                            <div className="w-14 h-14 bg-bg-light text-primary flex items-center justify-center rounded-none group-hover:bg-primary group-hover:text-gold transition-colors">
+                            <div className="w-14 h-14 bg-bg-light text-primary flex items-center justify-center rounded-none transition-all duration-300 group-hover:border-gold group-hover:text-gold border border-transparent">
                                 <Code size={24} />
                             </div>
                             <div>
-                                <div className="font-display font-bold text-xl text-primary mb-1">MERN Stack Developer</div>
+                                <div className="font-display font-bold text-xl text-primary mb-1 group-hover:text-gold transition-colors">MERN Stack Developer</div>
                                 <div className="text-xs text-accent uppercase tracking-wider font-bold">Part-time / Contract</div>
                             </div>
                         </div>
 
                         {/* Card 2 */}
                         <div className="bg-white p-8 border border-gray-100 flex items-center gap-6 hover:border-gold/30 hover:shadow-lg transition-all duration-300 group text-left">
-                            <div className="w-14 h-14 bg-bg-light text-primary flex items-center justify-center rounded-none group-hover:bg-primary group-hover:text-gold transition-colors">
+                            <div className="w-14 h-14 bg-bg-light text-primary flex items-center justify-center rounded-none transition-all duration-300 group-hover:border-gold group-hover:text-gold border border-transparent">
                                 <Code size={24} />
                             </div>
                             <div>
-                                <div className="font-display font-bold text-xl text-primary mb-1">React Native Developer</div>
+                                <div className="font-display font-bold text-xl text-primary mb-1 group-hover:text-gold transition-colors">React Native Developer</div>
                                 <div className="text-xs text-accent uppercase tracking-wider font-bold">Project Based</div>
                             </div>
                         </div>

@@ -70,7 +70,7 @@ const AboutPage = () => {
                                 { icon: <Award size={24} />, title: "Excellence", desc: "Clean, scalable code with high performance and smooth UX." }
                             ].map((item, idx) => (
                                 <div key={idx} className="flex gap-6 items-start group">
-                                    <div className="w-12 h-12 border border-gold/30 bg-white text-primary rounded-none flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-gold transition-all duration-300 shadow-sm">
+                                    <div className="w-12 h-12 border border-gold/30 bg-white text-primary rounded-none flex items-center justify-center shrink-0 transition-all duration-300 shadow-sm group-hover:border-gold group-hover:text-gold group-hover:shadow-md">
                                         {item.icon}
                                     </div>
                                     <div>

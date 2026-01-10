@@ -83,7 +83,7 @@ const ServicesPage = () => {
                                 {service.ideal}
                             </div>
 
-                            <div className="w-14 h-14 bg-bg-light border border-gray-100 flex items-center justify-center text-primary mb-8 group-hover:bg-primary group-hover:text-gold transition-colors duration-500">
+                            <div className="w-14 h-14 bg-bg-light border border-gray-100 flex items-center justify-center text-primary mb-8 transition-all duration-500 group-hover:border-gold group-hover:text-gold group-hover:shadow-md">
                                 {service.icon}
                             </div>
 
