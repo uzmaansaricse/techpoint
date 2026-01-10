@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 const testimonials = [
     {
@@ -29,90 +29,87 @@ const Testimonials = () => {
     const prev = () => setCurrent((curr) => (curr - 1 + testimonials.length) % testimonials.length);
 
     useEffect(() => {
-        const timer = setInterval(next, 5000);
+        const timer = setInterval(next, 6000);
         return () => clearInterval(timer);
     }, []);
 
     return (
-        <section className="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+        <section className="py-24 bg-white relative overflow-hidden">
+            {/* Background Texture */}
+            <div className="absolute inset-0 opacity-5 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
 
-            {/* Soft Background Glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-blue-100 rounded-full blur-3xl opacity-40"></div>
+            <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10 flex flex-col items-center">
 
-            <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
-                
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <span className="text-accent font-semibold tracking-widest text-sm uppercase mb-2 block">
-                        Testimonials
+                    <span className="font-cursive text-4xl text-accent mb-2 block transform -rotate-3">
+                        Client Stories
                     </span>
-                    <h2 className="text-3xl lg:text-4xl font-display font-bold text-primary">
-                        What Our Clients Say
+                    <h2 className="text-3xl lg:text-5xl font-display font-bold text-primary">
+                        Committed to <br /> <span className="text-secondary font-serif italic">Excellence</span>
                     </h2>
                 </div>
 
-                <div className="max-w-4xl mx-auto relative group">
+                <div className="max-w-4xl w-full relative">
+
+                    {/* Decorative Quotes */}
+                    <Quote className="absolute top-0 left-0 text-gold/10 w-32 h-32 md:w-48 md:h-48 transform -translate-x-10 -translate-y-10" />
 
                     {/* Testimonial Card */}
-                    <div className="overflow-hidden glass-panel p-10 md:p-14 rounded-3xl bg-white/70 shadow-xl backdrop-blur-xl border border-white/40 transition-all">
-                        
-                        {/* Stars */}
-                        <div className="flex justify-center mb-6">
-                            {[1, 2, 3, 4, 5].map(s => (
-                                <Star key={s} size={20} className="text-yellow-400 fill-yellow-400" />
-                            ))}
-                        </div>
-
-                        {/* Text */}
-                        <p className="text-xl md:text-2xl text-secondary mb-10 leading-relaxed italic">
-                            "{testimonials[current].text}"
-                        </p>
-
-                        {/* Avatar + Details */}
-                        <div className="flex items-center justify-center gap-4">
-                            <img
-                                src={testimonials[current].image}
-                                alt={testimonials[current].name}
-                                className="w-16 h-16 rounded-full border-2 border-white shadow-lg"
-                            />
-                            <div className="text-left">
-                                <h4 className="font-bold text-primary text-lg">{testimonials[current].name}</h4>
-                                <p className="text-sm text-secondary">{testimonials[current].role}</p>
+                    <div className="relative bg-transparent p-4 md:p-8">
+                        <motion-div className="text-center" key={current}>
+                            {/* Stars */}
+                            <div className="flex justify-center mb-8 gap-1">
+                                {[1, 2, 3, 4, 5].map(s => (
+                                    <Star key={s} size={16} className="text-accent fill-accent" />
+                                ))}
                             </div>
-                        </div>
+
+                            {/* Text */}
+                            <p className="text-xl md:text-3xl text-primary mb-12 leading-relaxed font-serif font-light">
+                                "{testimonials[current].text}"
+                            </p>
+
+                            {/* Avatar + Details */}
+                            <div className="flex flex-col items-center justify-center gap-4">
+                                <div className="p-1 border border-accent rounded-full">
+                                    <img
+                                        src={testimonials[current].image}
+                                        alt={testimonials[current].name}
+                                        className="w-16 h-16 rounded-full object-cover"
+                                    />
+                                </div>
+                                <div className="text-center">
+                                    <h4 className="font-bold text-primary text-lg tracking-wide uppercase">{testimonials[current].name}</h4>
+                                    <p className="text-sm text-secondary font-light tracking-widest uppercase mt-1">{testimonials[current].role}</p>
+                                </div>
+                            </div>
+                        </motion-div>
                     </div>
 
                     {/* Controls */}
                     <button
                         onClick={prev}
-                        className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-5 md:-translate-x-14 p-3 bg-white rounded-full shadow-lg text-primary hover:text-accent hover:shadow-xl transition-all opacity-0 group-hover:opacity-100"
+                        className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-4 md:-translate-x-16 p-4 text-primary hover:text-accent transition-colors"
                     >
-                        <ChevronLeft size={24} />
+                        <ChevronLeft size={32} strokeWidth={1} />
                     </button>
 
                     <button
                         onClick={next}
-                        className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-5 md:translate-x-14 p-3 bg-white rounded-full shadow-lg text-primary hover:text-accent hover:shadow-xl transition-all opacity-0 group-hover:opacity-100"
+                        className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-4 md:translate-x-16 p-4 text-primary hover:text-accent transition-colors"
                     >
-                        <ChevronRight size={24} />
+                        <ChevronRight size={32} strokeWidth={1} />
                     </button>
-
-                    {/* Dots */}
-                    <div className="flex justify-center gap-3 mt-8">
-                        {testimonials.map((_, i) => (
-                            <button
-                                key={i}
-                                onClick={() => setCurrent(i)}
-                                className={`h-2.5 rounded-full transition-all duration-300 ${
-                                    current === i ? 'bg-accent w-7' : 'bg-gray-300 w-2.5'
-                                }`}
-                            />
-                        ))}
-                    </div>
                 </div>
             </div>
         </section>
     );
 };
+
+// Simple pseudo-motion component to avoid adding motion dep if not needed, 
+// but since we used it in Hero, we should probably import it or just use CSS key keyframes.
+// I'll stick to CSS transition via class key for simplicity or just CSS.
+// Actually, let's just make it simple React for now.
 
 export default Testimonials;

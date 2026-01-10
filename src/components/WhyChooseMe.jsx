@@ -3,93 +3,83 @@ import { Zap, ShieldCheck, Layout, MonitorSmartphone } from 'lucide-react';
 
 const features = [
     {
-        icon: <Zap size={24} />,
-        title: 'Blazing Fast Performance',
-        description: 'Optimized code and assets for lightning-fast load times and smooth interactions.'
+        icon: <Zap size={20} />,
+        title: 'High Performance',
+        description: 'Blazing fast load times optimized for conversion.'
     },
     {
-        icon: <ShieldCheck size={24} />,
-        title: 'Reliable & Secure',
-        description: 'Built with security best practices to protect your data and users.'
+        icon: <ShieldCheck size={20} />,
+        title: 'Secure by Design',
+        description: 'Enterprise-grade security standards for peace of mind.'
     },
     {
-        icon: <Layout size={24} />,
-        title: 'Modern UI/UX',
-        description: 'Clean, aesthetic designs that provide an exceptional user experience.'
+        icon: <Layout size={20} />,
+        title: 'Pixel Perfection',
+        description: 'Impeccable attention to detail in every interface.'
     },
     {
-        icon: <MonitorSmartphone size={24} />,
-        title: 'Fully Responsive',
-        description: 'Flawless adaptability across all devices, from mobile phones to 4K desktops.'
+        icon: <MonitorSmartphone size={20} />,
+        title: 'Universal Adaptability',
+        description: 'Flawless experiences across all device sizes.'
     }
 ];
 
 const WhyChooseMe = () => {
     return (
-        <section className="py-24 bg-gray-50">
-            <div className="container mx-auto px-6 md:px-12 lg:px-24 grid lg:grid-cols-2 gap-20 items-center">
+        <section className="py-24 bg-bg-light">
+            <div className="container mx-auto px-6 md:px-12 lg:px-24">
+                <div className="grid lg:grid-cols-2 gap-20 items-center">
 
-                {/* Text Section */}
-                <div>
-                    <span className="text-accent font-semibold tracking-wider text-sm uppercase mb-3 block">
-                        Why Choose Me
-                    </span>
+                    {/* Text Section */}
+                    <div>
+                        <div className="inline-block border-b border-accent pb-1 mb-6">
+                            <span className="text-primary font-bold tracking-widest text-xs uppercase">The Advantage</span>
+                        </div>
 
-                    <h2 className="text-4xl lg:text-5xl font-display font-bold text-primary leading-tight mb-6">
-                        Quality That Speaks  
-                        <br />
-                        <span className="text-gradient">For Itself</span>
-                    </h2>
+                        <h2 className="text-4xl lg:text-5xl font-display font-bold text-primary leading-[1.2] mb-8">
+                            Combining Art & <br />
+                            <span className="text-secondary font-serif italic text-4xl lg:text-5xl">Engineering</span>
+                        </h2>
 
-                    <p className="text-secondary text-lg leading-relaxed mb-10 max-w-xl">
-                        I don’t just write code — I build long-term digital solutions.  
-                        Clean architecture, future-proof tech, and designs that convert.
-                    </p>
+                        <p className="text-secondary text-lg leading-relaxed mb-12 max-w-xl font-light">
+                            We don't just build websites; we craft digital legacies. Our approach merges aesthetic beauty with robust technical architecture to create platforms that stand the test of time.
+                        </p>
 
-                    {/* Features list */}
-                    <div className="grid sm:grid-cols-2 gap-6">
-                        {features.map((feature, idx) => (
-                            <div
-                                key={idx}
-                                className="flex items-start gap-4 group"
-                            >
-                                {/* Icon box */}
-                                <div className="p-4 bg-white rounded-xl shadow-md group-hover:shadow-xl transition-all duration-300 text-accent ring-1 ring-gray-100 group-hover:-translate-y-1">
-                                    {feature.icon}
-                                </div>
-
-                                {/* Text */}
-                                <div>
-                                    <h4 className="font-semibold text-primary mb-1 text-lg">
+                        {/* Features list */}
+                        <div className="grid sm:grid-cols-2 gap-x-8 gap-y-10">
+                            {features.map((feature, idx) => (
+                                <div key={idx} className="flex flex-col gap-3 group">
+                                    <div className="text-accent mb-2 group-hover:scale-110 transition-transform origin-left">
+                                        {feature.icon}
+                                    </div>
+                                    <h4 className="font-display font-bold text-primary text-lg">
                                         {feature.title}
                                     </h4>
-                                    <p className="text-sm text-secondary leading-relaxed">
+                                    <p className="text-sm text-secondary leading-relaxed opacity-80">
                                         {feature.description}
                                     </p>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
 
-                {/* Decorative Visual */}
-                <div className="relative">
-                    {/* Gradient Background Blob */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-3xl rotate-6 blur-xl opacity-25 scale-105"></div>
+                    {/* Decorative Visual */}
+                    <div className="relative flex justify-center lg:justify-end">
+                        {/* Image Frame */}
+                        <div className="relative w-[400px] h-[500px] bg-white border border-gray-100 p-4 shadow-2xl skew-y-3 hover:skew-y-0 transition-all duration-700 ease-out">
+                            <div className="absolute top-0 left-0 w-full h-full border border-gold/20 -m-4 -z-10 bg-gold/5"></div>
 
-                    {/* Glass Card */}
-                    <div className="relative glass-panel rounded-3xl p-12 aspect-square flex items-center justify-center shadow-xl">
-                        <div className="text-center">
-                            <div className="text-7xl font-black text-gray-100 drop-shadow mb-4 select-none">
-                                100%
-                            </div>
-                            <div className="text-2xl font-bold text-primary">
-                                Client Satisfaction
+                            <div className="w-full h-full bg-primary relative overflow-hidden flex flex-col items-center justify-center text-center p-8">
+                                <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+
+                                <span className="font-cursive text-6xl text-gold mb-4 animate-pulse">100%</span>
+                                <span className="text-white text-xl font-display tracking-widest uppercase border-t border-white/20 pt-4">Client Satisfaction</span>
+                                <p className="text-white/60 text-xs mt-4 max-w-xs font-light">Our commitment to excellence ensures every project exceeds expectations.</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </section>
     );
