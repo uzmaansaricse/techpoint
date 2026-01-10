@@ -1,12 +1,13 @@
 import React from 'react';
 import SEO from '../components/SEO';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
 
 const projects = [
     {
         title: 'Modern E-commerce Store',
         category: 'Web Development',
-        image: 'bg-blue-100', // Placeholder
+        image: '', // Placeholder logic handled in CSS/Component
+        color: 'from-blue-900 to-slate-900',
         description: 'A full-stack e-commerce platform with payment integration and admin dashboard.',
         tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
         links: { live: '#', github: '#' }
@@ -14,7 +15,8 @@ const projects = [
     {
         title: 'Corporate Finance Portal',
         category: 'Web Design',
-        image: 'bg-slate-200',
+        image: '',
+        color: 'from-emerald-900 to-slate-900',
         description: 'Professional website for a finance firm with secure client login.',
         tags: ['Next.js', 'Tailwind', 'PostgreSQL'],
         links: { live: '#', github: '#' }
@@ -22,7 +24,8 @@ const projects = [
     {
         title: 'Fitness Tracking App',
         category: 'Mobile App',
-        image: 'bg-green-100',
+        image: '',
+        color: 'from-rose-900 to-slate-900',
         description: 'Cross-platform mobile app for tracking workouts and nutrition.',
         tags: ['React Native', 'Firebase', 'Redux'],
         links: { live: '#', github: '#' }
@@ -30,7 +33,8 @@ const projects = [
     {
         title: 'Restaurant Delivery System',
         category: 'Full Stack',
-        image: 'bg-orange-100',
+        image: '',
+        color: 'from-amber-900 to-slate-900',
         description: 'Order management system for a multi-chain restaurant business.',
         tags: ['MERN', 'Socket.io', 'Google Maps API'],
         links: { live: '#', github: '#' }
@@ -43,56 +47,75 @@ const TopProjects = () => {
             <SEO title="Top Projects" />
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
                 {/* Header */}
-                <div className="text-center mb-20">
-                    <span className="text-accent font-semibold tracking-wide text-sm uppercase mb-2 block">Portfolio</span>
-                    <h1 className="text-4xl md:text-5xl font-display font-bold text-primary mb-6">
-                        Our Top <span className="text-gradient">Projects</span>
+                <div className="text-center mb-20 max-w-3xl mx-auto">
+                    <span className="font-cursive text-4xl text-accent mb-4 block transform -rotate-2">
+                        Portfolio
+                    </span>
+                    <h1 className="text-4xl md:text-5xl font-display font-bold text-primary mb-6 leading-tight">
+                        Selected <span className="font-serif italic text-secondary">Works</span>
                     </h1>
-                    <p className="text-lg md:text-xl text-secondary max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg text-secondary mx-auto leading-relaxed font-light">
                         Explore some of our major work. We take pride in delivering robust and scalable solutions.
                     </p>
                 </div>
 
                 {/* Projects Grid */}
-                <div className="grid md:grid-cols-2 gap-10">
+                <div className="grid md:grid-cols-2 gap-12">
                     {projects.map((project, index) => (
                         <div
                             key={index}
-                            className="group glass-panel rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col h-full border border-slate-100"
+                            className="group bg-white rounded-none border border-gray-100 overflow-hidden hover:border-gold/30 hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full"
                         >
-                            {/* Image Placeholder */}
-                            <div className={`h-72 w-full ${project.image} relative overflow-hidden`}>
-                                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/40 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 duration-300 gap-4">
+                            {/* Image Placeholder area */}
+                            <div className={`h-80 w-full bg-gradient-to-br ${project.color} relative overflow-hidden flex items-center justify-center p-8 group-hover:scale-[1.02] transition-transform duration-700`}>
+                                <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+
+                                {/* Abstract Shapes */}
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+
+                                <span className="relative z-10 font-display font-bold text-3xl text-white/90 tracking-widest uppercase border border-white/20 px-6 py-2">
+                                    {project.category}
+                                </span>
+
+                                {/* Hover Overlay */}
+                                <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-6 backdrop-blur-sm z-20">
                                     <a
                                         href={project.links.live}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform shadow-md"
+                                        className="p-4 bg-white text-primary hover:bg-gold hover:text-white transition-all transform hover:scale-110 shadow-lg"
                                         title="View Live"
                                     >
-                                        <ExternalLink size={20} />
+                                        <ExternalLink size={24} />
                                     </a>
                                     <a
                                         href={project.links.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="p-3 bg-white text-primary rounded-full hover:scale-110 transition-transform shadow-md"
+                                        className="p-4 bg-primary text-white border border-white/20 hover:bg-white hover:text-primary transition-all transform hover:scale-110 shadow-lg"
                                         title="View Code"
                                     >
-                                        <Github size={20} />
+                                        <Github size={24} />
                                     </a>
                                 </div>
                             </div>
 
                             {/* Project Info */}
-                            <div className="p-8 flex-1 flex flex-col">
-                                <div className="text-xs font-bold text-accent uppercase tracking-wider mb-2">{project.category}</div>
-                                <h3 className="text-2xl font-bold text-primary mb-4">{project.title}</h3>
-                                <p className="text-secondary mb-6 flex-grow leading-relaxed">{project.description}</p>
+                            <div className="p-8 lg:p-10 flex-1 flex flex-col bg-white">
+                                <div className="flex justify-between items-start mb-4">
+                                    <h3 className="text-3xl font-display font-bold text-primary group-hover:text-gold transition-colors duration-300">
+                                        {project.title}
+                                    </h3>
+                                    <ArrowUpRight className="text-gold opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                                </div>
 
-                                <div className="flex flex-wrap gap-2 mt-auto">
+                                <p className="text-secondary mb-8 flex-grow leading-relaxed font-light text-lg">
+                                    {project.description}
+                                </p>
+
+                                <div className="flex flex-wrap gap-3 mt-auto border-t border-gray-50 pt-6">
                                     {project.tags.map(tag => (
-                                        <span key={tag} className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-medium">
+                                        <span key={tag} className="text-xs font-bold uppercase tracking-widest text-primary/60 border border-gray-200 px-4 py-2 hover:border-gold/50 hover:text-gold transition-colors cursor-default">
                                             {tag}
                                         </span>
                                     ))}
