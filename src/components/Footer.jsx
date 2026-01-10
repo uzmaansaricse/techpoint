@@ -45,7 +45,7 @@ const Footer = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-lg font-serif font-medium italic text-accent mb-8 relative inline-block">
+                        <h4 className="text-lg font-serif font-medium italic text-gold mb-8 relative inline-block">
                             Explore
                             <span className="absolute -bottom-2 left-0 w-1/2 h-[1px] bg-gold/50"></span>
                         </h4>
@@ -60,7 +60,7 @@ const Footer = () => {
 
                     {/* Services */}
                     <div>
-                        <h4 className="text-lg font-serif font-medium italic text-accent mb-8 relative inline-block">
+                        <h4 className="text-lg font-serif font-medium italic text-gold mb-8 relative inline-block">
                             Expertise
                             <span className="absolute -bottom-2 left-0 w-1/2 h-[1px] bg-gold/50"></span>
                         </h4>
@@ -74,7 +74,7 @@ const Footer = () => {
 
                     {/* Contact */}
                     <div>
-                        <h4 className="text-lg font-serif font-medium italic text-accent mb-8 relative inline-block">
+                        <h4 className="text-lg font-serif font-medium italic text-gold mb-8 relative inline-block">
                             Visit Us
                             <span className="absolute -bottom-2 left-0 w-1/2 h-[1px] bg-gold/50"></span>
                         </h4>
