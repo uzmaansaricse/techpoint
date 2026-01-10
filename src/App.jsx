@@ -11,6 +11,9 @@ import AppDevelopment from './pages/AppDevelopment';
 import TopProjects from './pages/TopProjects';
 import Career from './pages/Career';
 import ContactPage from './pages/ContactPage';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import Sitemap from './pages/Sitemap';
 
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
             <Route path="/portfolio" element={<Navigate to="/top-projects" replace />} />
             <Route path="/career" element={<Career />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/sitemap" element={<Sitemap />} />
           </Routes>
         </main>
         <Footer />

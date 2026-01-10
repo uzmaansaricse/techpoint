@@ -94,18 +94,18 @@ const Footer = () => {
                         &copy; {new Date().getFullYear()} TechPoint India. All rights reserved.
                     </p>
                     <div className="flex gap-8 text-xs text-slate-500 uppercase tracking-wider">
-                        <a href="#" className="hover:text-gold transition-colors relative group">
+                        <Link to="/privacy" className="hover:text-gold transition-colors relative group">
                             Privacy
                             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                        <a href="#" className="hover:text-gold transition-colors relative group">
+                        </Link>
+                        <Link to="/terms" className="hover:text-gold transition-colors relative group">
                             Terms
                             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                        <a href="#" className="hover:text-gold transition-colors relative group">
+                        </Link>
+                        <Link to="/sitemap" className="hover:text-gold transition-colors relative group">
                             Sitemap
                             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
