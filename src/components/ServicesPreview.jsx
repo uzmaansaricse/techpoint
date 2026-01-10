@@ -59,16 +59,16 @@ const ServicesPreview = () => {
                         <Link
                             to={service.link}
                             key={index}
-                            className="group bg-white p-10 h-full flex flex-col justify-between border border-gray-100 transition-all duration-300 hover:border-gold/40 hover:shadow-gold hover:-translate-y-2 relative overflow-hidden"
+                            className="group bg-white p-10 h-full flex flex-col justify-between border border-gray-100 transition-all duration-500 hover:border-gold/50 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden"
                         >
                             <div className="relative z-10">
                                 {/* Icon */}
-                                <div className="w-14 h-14 rounded-none bg-bg-light border border-gray-100 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-gold transition-colors duration-300 mb-8 shadow-sm">
+                                <div className="w-14 h-14 rounded-none bg-bg-light border border-gray-100 flex items-center justify-center text-primary transition-all duration-500 group-hover:border-gold group-hover:text-gold mb-8 shadow-sm group-hover:shadow-md">
                                     {service.icon}
                                 </div>
 
                                 {/* Title */}
-                                <h3 className="text-xl font-display font-bold text-primary mb-4 transition-colors duration-300 group-hover:text-primary">
+                                <h3 className="text-xl font-display font-bold text-primary mb-4 transition-colors duration-300 group-hover:text-gold">
                                     {service.title}
                                 </h3>
 
@@ -79,8 +79,8 @@ const ServicesPreview = () => {
                             </div>
 
                             {/* Learn More */}
-                            <div className="relative z-10 flex items-center text-xs font-bold uppercase tracking-widest text-gold transition-all duration-300 group-hover:text-primary">
-                                Explore <ArrowRight className="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" />
+                            <div className="relative z-10 flex items-center text-xs font-bold uppercase tracking-widest text-primary/40 transition-all duration-500 group-hover:text-primary group-hover:translate-x-2">
+                                Explore <ArrowRight className="w-3 h-3 ml-2" />
                             </div>
                         </Link>
                     ))}
