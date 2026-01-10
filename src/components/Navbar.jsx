@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
-	const [dropdownOpen, setDropdownOpen] = useState(false);
-	const location = useLocation();
+	const [servicesOpen, setServicesOpen] = useState(false);
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -16,151 +15,163 @@ const Navbar = () => {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
 
-	// Close mobile menu on route change
-	useEffect(() => {
-		setIsOpen(false);
-		setDropdownOpen(false);
-	}, [location]);
-
-	const serviceLinks = [
-		{ name: 'Static & Dynamic Websites', path: '/services' },
-		{ name: 'Full-Stack Development', path: '/services' },
-		{ name: 'E-commerce Solutions', path: '/ecommerce' },
-		{ name: 'Mobile App Development', path: '/app-development' },
-		{ name: 'UI/UX Design', path: '/services' },
-		{ name: 'SEO Optimization', path: '/services' },
-		{ name: 'Hosting & Maintenance', path: '/services' },
+	const navLinks = [
+		{ name: 'Home', path: '/' },
+		{ name: 'About', path: '/about' },
+		{
+			name: 'Services',
+			path: '/services',
+			dropdown: [
+				{ name: 'All Services', path: '/services' },
+				{ name: 'E-commerce', path: '/ecommerce' },
+				{ name: 'App Development', path: '/app-development' },
+			],
+		},
+		{ name: 'Projects', path: '/top-projects' },
+		{ name: 'Career', path: '/career' },
+		{ name: 'Contact', path: '/contact' },
 	];
 
-	// Small presentational subcomponents
-	const Brand = () => (
-		// Use logo from public folder; show compact label on md+
-		<Link to="/" className="flex items-center gap-3 group">
-			<div className="w-11 h-11 rounded-xl overflow-hidden flex items-center justify-center shadow-lg bg-white/5 transform transition-transform group-hover:scale-105">
-				{/* Main logo file (logo.jpeg) */}
-				<img src="/logo.jpeg" alt="AgencyX logo" loading="lazy" className="w-full h-full object-contain" />
+	return (
+		<nav
+			className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-primary/95 backdrop-blur-md shadow-lg py-2' : 'bg-transparent py-4'
+				}`}
+		>
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="flex items-center justify-between h-16">
+					{/* Logo */}
+					<Link to="/" className="flex-shrink-0 flex items-center gap-2 group">
+						<div className="text-2xl font-display font-bold text-white tracking-widest group-hover:text-accent transition-colors">
+							TECH<span className="text-accent">POINT</span>
+						</div>
+					</Link>
+
+					{/* Desktop Navigation */}
+					<div className="hidden md:block">
+						<div className="ml-10 flex items-baseline space-x-8">
+							{navLinks.map((link) => (
+								<div key={link.name} className="relative group">
+									{link.dropdown ? (
+										<div
+											className="relative"
+											onMouseEnter={() => setServicesOpen(true)}
+											onMouseLeave={() => setServicesOpen(false)}
+										>
+											<button
+												className="text-gray-300 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1"
+											>
+												{link.name}
+												<ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+											</button>
+
+											{/* Dropdown Menu */}
+											<div
+												className={`absolute left-0 mt-0 w-48 bg-primary/95 backdrop-blur-xl rounded-b-lg shadow-xl border-t-2 border-accent overflow-hidden transition-all duration-300 origin-top ${servicesOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'
+													}`}
+											>
+												<div className="py-2">
+													{link.dropdown.map((item) => (
+														<NavLink
+															key={item.name}
+															to={item.path}
+															className={({ isActive }) =>
+																`block px-4 py-3 text-sm transition-colors border-l-2 ${isActive
+																	? 'border-accent bg-white/5 text-accent'
+																	: 'border-transparent text-gray-300 hover:bg-white/5 hover:text-white'
+																}`
+															}
+														>
+															{item.name}
+														</NavLink>
+													))}
+												</div>
+											</div>
+										</div>
+									) : (
+										<NavLink
+											to={link.path}
+											className={({ isActive }) =>
+												`text-sm font-medium transition-all duration-300 relative px-3 py-2 ${isActive ? 'text-accent' : 'text-gray-300 hover:text-white'
+												}`
+											}
+										>
+											{({ isActive }) => (
+												<>
+													{link.name}
+													<span className={`absolute bottom-0 left-0 w-full h-0.5 bg-accent transform origin-left transition-transform duration-300 ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+												</>
+											)}
+										</NavLink>
+									)}
+								</div>
+							))}
+						</div>
+					</div>
+
+					{/* CTA Button */}
+					<div className="hidden md:block">
+						<Link to="/contact" className="bg-accent hover:bg-opacity-90 text-primary font-bold py-2 px-6 rounded-full transition-all hover:shadow-[0_0_20px_rgba(0,212,255,0.5)] transform hover:-translate-y-0.5 text-sm">
+							Get Started
+						</Link>
+					</div>
+
+					{/* Mobile menu button */}
+					<div className="md:hidden">
+						<button
+							onClick={() => setIsOpen(!isOpen)}
+							className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-white/10 focus:outline-none transition-colors"
+						>
+							{isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+						</button>
+					</div>
+				</div>
 			</div>
-			{/* <span className="hidden md:inline-block text-lg font-semibold tracking-tight text-primary">AgencyX</span> */}
-		</Link>
-	);
 
-	const ServicesDropdown = () => (
-		<div className="relative">
-			<button
-				type="button"
-				aria-haspopup="menu"
-				aria-expanded={['/services', '/ecommerce', '/app-development'].includes(location.pathname)}
-				className={`flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${['/services', '/ecommerce', '/app-development'].includes(location.pathname) ? 'text-accent bg-white/10' : 'text-secondary hover:text-accent hover:bg-white/5'}`}
-			>
-				<span>Services</span>
-				<ChevronDown size={14} className="ml-1 transition-transform" />
-			</button>
-
-			{/* Hover + focus friendly panel: show on group hover OR when focused (group-focus-within). removed pointer-events-none to allow keyboard access */}
-			<div className="absolute top-full left-0 mt-3 w-72 opacity-0 invisible group-hover:opacity-100 group-focus-within:opacity-100 group-hover:visible group-focus-within:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-				<div className="bg-white/70 backdrop-blur-sm rounded-2xl p-3 shadow-2xl border border-gray-100">
-					{/* grouped list with subtle dividers */}
-					{serviceLinks.map((service, idx) => (
-						<React.Fragment key={idx}>
-							<Link
-								to={service.path}
-								className="flex items-center gap-3 px-4 py-2 text-sm text-secondary hover:text-accent hover:bg-white/5 rounded-md transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent"
-							>
-								{/* placeholder dot to give a visual anchor */}
-								<span className="w-2 h-2 bg-slate-300 rounded-full" />
-								<span>{service.name}</span>
-							</Link>
-							{idx < serviceLinks.length - 1 && <div className="mx-3 my-1 border-t border-gray-100" />}
-						</React.Fragment>
+			{/* Mobile Menu */}
+			<div className={`md:hidden transition-all duration-300 overflow-hidden ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
+				<div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-primary/95 backdrop-blur-xl border-t border-white/10 shadow-xl">
+					{navLinks.map((link) => (
+						<div key={link.name}>
+							{link.dropdown ? (
+								<>
+									<div className="px-3 py-2 text-base font-medium text-gray-300">{link.name}</div>
+									<div className="pl-4 space-y-1 border-l-2 border-white/10 ml-3">
+										{link.dropdown.map((subLink) => (
+											<NavLink
+												key={subLink.name}
+												to={subLink.path}
+												onClick={() => setIsOpen(false)}
+												className={({ isActive }) =>
+													`block px-3 py-2 rounded-md text-sm font-medium ${isActive
+														? 'text-accent bg-white/5'
+														: 'text-gray-400 hover:text-white hover:bg-white/5'
+													}`
+												}
+											>
+												{subLink.name}
+											</NavLink>
+										))}
+									</div>
+								</>
+							) : (
+								<NavLink
+									to={link.path}
+									onClick={() => setIsOpen(false)}
+									className={({ isActive }) =>
+										`block px-3 py-2 rounded-md text-base font-medium ${isActive
+											? 'text-accent bg-white/5'
+											: 'text-gray-300 hover:text-white hover:bg-white/5'
+										}`
+									}
+								>
+									{link.name}
+								</NavLink>
+							)}
+						</div>
 					))}
 				</div>
 			</div>
-		</div>
-	);
-
-	const DesktopNav = () => (
-		<nav className="hidden md:flex items-center gap-3">
-			<Link to="/" className={`text-sm font-medium px-3 py-2 rounded-md transition-colors ${location.pathname === '/' ? 'text-accent bg-white/10' : 'text-secondary hover:text-accent hover:bg-white/5'}`}>Home</Link>
-
-			<Link to="/about" className={`text-sm font-medium px-3 py-2 rounded-md transition-colors ${location.pathname === '/about' ? 'text-accent bg-white/10' : 'text-secondary hover:text-accent hover:bg-white/5'}`}>About</Link>
-
-			{/* Wrap ServicesDropdown in a group to enable hover reveal */}
-			<div className="group">
-				<ServicesDropdown />
-			</div>
-
-			<Link to="/top-projects" className={`text-sm font-medium px-3 py-2 rounded-md transition-colors ${location.pathname === '/top-projects' ? 'text-accent bg-white/10' : 'text-secondary hover:text-accent hover:bg-white/5'}`}>Top Projects</Link>
-
-			<Link to="/career" className={`text-sm font-medium px-3 py-2 rounded-md transition-colors ${location.pathname === '/career' ? 'text-accent bg-white/10' : 'text-secondary hover:text-accent hover:bg-white/5'}`}>Career</Link>
-
-			<Link to="/contact" className="ml-3 px-4 py-2 bg-primary text-white text-sm font-medium rounded-full shadow-md hover:bg-accent transition-transform hover:-translate-y-0.5">Contact</Link>
 		</nav>
-	);
-
-	const MobileMenu = () => (
-		// modal-like overlay
-		<div className="md:hidden">
-			<div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity" />
-			<div className="fixed inset-0 flex items-start justify-center pt-20 z-50 px-4">
-				<div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-100 p-6">
-					<div className="flex items-center justify-between mb-4">
-						<Brand />
-						<button className="p-2 rounded-md text-primary hover:bg-white/5" onClick={() => setIsOpen(false)} aria-label="Close menu">
-							<X size={20} />
-						</button>
-					</div>
-
-					<div className="flex flex-col gap-2">
-						<Link to="/" className="text-base font-medium py-3 rounded-md text-secondary hover:bg-white/5">Home</Link>
-						<Link to="/about" className="text-base font-medium py-3 rounded-md text-secondary hover:bg-white/5">About</Link>
-
-						<div className="py-2">
-							<button
-								onClick={() => setDropdownOpen(!dropdownOpen)}
-								className="flex items-center justify-between w-full text-base font-medium text-secondary px-2 py-2 rounded-md hover:bg-white/5 transition-colors"
-								aria-expanded={dropdownOpen}
-							>
-								<span>Services</span>
-								<ChevronDown size={16} className={`transform transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
-							</button>
-
-							{dropdownOpen && (
-								<div className="mt-3 grid gap-2">
-									{serviceLinks.map((service, idx) => (
-										<Link key={idx} to={service.path} className="text-sm text-slate-600 py-2 block rounded-md hover:bg-white/5 px-3">
-											{service.name}
-										</Link>
-									))}
-								</div>
-							)}
-						</div>
-
-						<Link to="/top-projects" className="text-base font-medium py-3 rounded-md text-secondary hover:bg-white/5">Top Projects</Link>
-						<Link to="/career" className="text-base font-medium py-3 rounded-md text-secondary hover:bg-white/5">Career</Link>
-						<Link to="/contact" className="text-base font-medium py-3 rounded-md bg-primary/95 text-white text-center">Contact</Link>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
-
-	return (
-		<header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-sm bg-white/60 border-b border-gray-200 py-3 shadow-sm' : 'bg-transparent py-5'}`}>
-			<div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-16 flex items-center justify-between gap-6">
-				<Brand />
-
-				{/* Desktop Menu */}
-				<DesktopNav />
-
-				{/* Mobile Toggle */}
-				<button className="md:hidden p-2 rounded-md text-primary hover:bg-white/5 transition-colors" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
-					{isOpen ? <X size={22} /> : <Menu size={22} />}
-				</button>
-			</div>
-
-			{/* Mobile Menu Modal */}
-			{isOpen && <MobileMenu />}
-		</header>
 	);
 };
 
