@@ -3,21 +3,21 @@ import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
 const testimonials = [
     {
-        name: "Sarah Johnson",
-        role: "CEO, TechStart",
-        image: "https://randomuser.me/api/portraits/women/44.jpg",
+        name: "Rajesh Mehta",
+        role: "Director, FinTech Solutions",
+        image: "https://randomuser.me/api/portraits/men/32.jpg",
         text: "The team delivered our e-commerce platform ahead of schedule. The design is stunning and sales have increased by 40% since launch."
     },
     {
-        name: "Michael Chen",
-        role: "Founder, GreenLeaf",
-        image: "https://randomuser.me/api/portraits/men/32.jpg",
+        name: "Ananya Singh",
+        role: "Founder, Organic Roots",
+        image: "https://randomuser.me/api/portraits/women/65.jpg",
         text: "Professional, reliable, and incredibly skilled. They transformed our outdated website into a modern digital asset that we are proud of."
     },
     {
-        name: "Emily Davis",
-        role: "Marketing Director, OmniCorp",
-        image: "https://randomuser.me/api/portraits/women/68.jpg",
+        name: "Vikram Malhotra",
+        role: "VP Marketing, TechGiant India",
+        image: "https://randomuser.me/api/portraits/men/86.jpg",
         text: "Exceptional attention to detail. The SEO optimization services have helped us rank #1 for our key search terms."
     }
 ];
@@ -57,7 +57,7 @@ const Testimonials = () => {
 
                     {/* Testimonial Card */}
                     <div className="relative bg-transparent p-4 md:p-8">
-                        <motion-div className="text-center" key={current}>
+                        <div className="text-center animate-fade-in" key={current}>
                             {/* Stars */}
                             <div className="flex justify-center mb-8 gap-1">
                                 {[1, 2, 3, 4, 5].map(s => (
@@ -84,7 +84,7 @@ const Testimonials = () => {
                                     <p className="text-sm text-secondary font-light tracking-widest uppercase mt-1">{testimonials[current].role}</p>
                                 </div>
                             </div>
-                        </motion-div>
+                        </div>
                     </div>
 
                     {/* Controls */}

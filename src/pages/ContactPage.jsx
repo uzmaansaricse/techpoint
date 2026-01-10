@@ -114,7 +114,7 @@ const InputField = ({ label, placeholder }) => (
 /* Reusable Contact Info Card */
 const ContactItem = ({ icon, title, text }) => (
     <div className="flex items-start gap-6 group cursor-default">
-        <div className="w-12 h-12 flex items-center justify-center border border-primary/10 text-primary group-hover:bg-primary group-hover:text-gold transition-colors duration-500 rounded-none">
+        <div className="w-12 h-12 flex items-center justify-center border border-primary/10 text-primary group-hover:border-gold group-hover:text-gold transition-colors duration-500 rounded-none shadow-sm group-hover:shadow-gold">
             {icon}
         </div>
 
