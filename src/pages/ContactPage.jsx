@@ -1,60 +1,68 @@
 import React from 'react';
 import SEO from '../components/SEO';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, ArrowRight } from 'lucide-react';
 
 const ContactPage = () => {
     return (
-        <div className="pt-28 pb-24 bg-bg-light min-h-screen">
+        <div className="pt-32 pb-24 bg-bg-light min-h-screen relative overflow-hidden">
+            {/* Background Decoration */}
+            <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none">
+                <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <circle cx="100" cy="0" r="50" fill="none" stroke="#D4AF37" strokeWidth="0.5" />
+                </svg>
+            </div>
+
             <SEO title="Contact" />
 
-            <div className="container mx-auto px-6 md:px-12 lg:px-20">
-                <div className="grid lg:grid-cols-2 gap-16 items-start">
+            <div className="container mx-auto px-6 md:px-12 lg:px-24">
+                <div className="grid lg:grid-cols-2 gap-20 items-start">
 
                     {/* Left: Contact Info */}
-                    <div className="animate-fadeIn">
-                        <span className="text-accent font-semibold tracking-wider text-sm uppercase mb-3 block">
+                    <div className="animate-fadeIn pt-8">
+                        <span className="font-cursive text-4xl text-accent mb-2 block transform -rotate-2">
                             Get In Touch
                         </span>
 
-                        <h1 className="text-4xl lg:text-5xl font-display font-bold text-primary leading-tight mb-6">
+                        <h1 className="text-4xl lg:text-6xl font-display font-bold text-primary leading-tight mb-8">
                             Let's Talk About <br />
-                            Your <span className="text-gradient">Project</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary">Your Vision</span>
                         </h1>
 
-                        <p className="text-lg text-secondary mb-12 max-w-md leading-relaxed">
-                            Got an idea? We’d love to help you bring it to life.
-                            Drop us a message and we’ll get back within **24 hours.**
+                        <p className="text-xl text-secondary mb-12 max-w-md leading-relaxed font-light">
+                            Ready to start your next premium project? We are currently accepting new clients for 2026.
                         </p>
 
-                        <div className="space-y-10">
+                        <div className="space-y-12">
                             {/* Address */}
                             <ContactItem
-                                icon={<MapPin size={26} />}
-                                title="Our Office"
+                                icon={<MapPin size={24} />}
+                                title="Studio"
                                 text="123 Business Avenue, Tech City, TC 90210"
                             />
 
                             {/* Email */}
                             <ContactItem
-                                icon={<Mail size={26} />}
-                                title="Email Us"
-                                text="hello@agency.com"
+                                icon={<Mail size={24} />}
+                                title="Email"
+                                text="hello@techpoint.com"
                             />
 
                             {/* Phone */}
                             <ContactItem
-                                icon={<Phone size={26} />}
-                                title="Call Us"
+                                icon={<Phone size={24} />}
+                                title="Phone"
                                 text="+1 (555) 123-4567"
                             />
                         </div>
                     </div>
 
                     {/* Right: Form */}
-                    <div className="glass-panel p-10 rounded-3xl shadow-xl backdrop-blur-lg border border-white/20 animate-slideUp">
-                        <form className="space-y-7">
+                    <div className="bg-white p-10 md:p-14 shadow-2xl border border-gray-100 relative group">
+                        {/* Decorative Corner */}
+                        <div className="absolute top-0 right-0 w-20 h-20 bg-gold/10 -z-10 group-hover:scale-150 transition-transform duration-700 rounded-bl-[100px]"></div>
 
-                            <div className="grid md:grid-cols-2 gap-6">
+                        <form className="space-y-8">
+                            <div className="grid md:grid-cols-2 gap-8">
                                 <InputField label="Name" placeholder="John Doe" />
                                 <InputField label="Email" placeholder="john@example.com" />
                             </div>
@@ -62,25 +70,24 @@ const ContactPage = () => {
                             <InputField label="Subject" placeholder="Project Inquiry" />
 
                             <div>
-                                <label className="block text-sm font-medium text-primary mb-2">
+                                <label className="block text-xs font-bold uppercase tracking-widest text-primary mb-3">
                                     Message
                                 </label>
                                 <textarea
                                     rows="4"
-                                    className="w-full px-4 py-3 bg-white/50 border border-slate-300/60 
-                                    rounded-xl focus:border-accent focus:ring-2 focus:ring-blue-100 
-                                    outline-none transition-all text-primary"
+                                    className="w-full px-0 py-4 bg-transparent border-b border-gray-200 
+                                    focus:border-accent outline-none transition-all text-primary resize-none placeholder:text-gray-300 font-light text-lg"
                                     placeholder="Tell us about your project..."
                                 ></textarea>
                             </div>
 
                             <button
                                 type="submit"
-                                className="w-full px-8 py-4 bg-primary text-white font-semibold text-lg 
-                                rounded-xl hover:bg-accent transition-all shadow-lg shadow-primary/20 
-                                flex items-center justify-center gap-2"
+                                className="w-full py-5 bg-primary text-white font-bold uppercase tracking-widest text-sm 
+                                hover:bg-accent hover:text-white transition-all duration-300 shadow-xl 
+                                flex items-center justify-center gap-3 group mt-4 hover:translate-y-[-2px]"
                             >
-                                Send Message <Send size={20} />
+                                Send Message <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </button>
                         </form>
                     </div>
@@ -93,12 +100,12 @@ const ContactPage = () => {
 /* Reusable Input Component */
 const InputField = ({ label, placeholder }) => (
     <div>
-        <label className="block text-sm font-medium text-primary mb-2">{label}</label>
+        <label className="block text-xs font-bold uppercase tracking-widest text-primary mb-3">{label}</label>
         <input
             type="text"
-            className="w-full px-4 py-3 bg-white/50 border border-slate-300/60 rounded-xl 
-            focus:border-accent focus:ring-2 focus:ring-blue-100 outline-none 
-            transition-all text-primary"
+            className="w-full px-0 py-4 bg-transparent border-b border-gray-200 
+            focus:border-accent outline-none 
+            transition-all text-primary placeholder:text-gray-300 font-light text-lg"
             placeholder={placeholder}
         />
     </div>
@@ -106,17 +113,16 @@ const InputField = ({ label, placeholder }) => (
 
 /* Reusable Contact Info Card */
 const ContactItem = ({ icon, title, text }) => (
-    <div className="flex items-start gap-4 group">
-        <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/40 shadow-md 
-        text-accent border border-white/30 group-hover:scale-110 transition-transform">
+    <div className="flex items-start gap-6 group cursor-default">
+        <div className="w-12 h-12 flex items-center justify-center border border-primary/10 text-primary group-hover:bg-primary group-hover:text-gold transition-colors duration-500 rounded-none">
             {icon}
         </div>
 
         <div>
-            <h4 className="text-lg font-bold text-primary group-hover:text-accent transition-colors">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-primary mb-2">
                 {title}
             </h4>
-            <p className="text-secondary mt-1">
+            <p className="text-secondary font-light text-lg group-hover:text-primary transition-colors">
                 {text}
             </p>
         </div>
