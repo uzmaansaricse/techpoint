@@ -13,8 +13,8 @@ const Footer = () => {
             <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
 
                 {/* Large Decorative Callout */}
-                <div className="mb-24 text-center relative">
-                    <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[120px] md:text-[200px] font-cursive text-white/[0.03] select-none whitespace-nowrap pointer-events-none">
+                <div className="mb-24 text-center relative max-w-full overflow-hidden">
+                    <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15vw] lg:text-[200px] font-cursive text-white/[0.03] select-none whitespace-nowrap pointer-events-none">
                         TechPoint
                     </span>
                     <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">Let's Build Something <br /> <span className="font-serif italic text-accent">Extraordinary</span></h2>

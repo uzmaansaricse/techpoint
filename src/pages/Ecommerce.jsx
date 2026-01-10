@@ -28,7 +28,7 @@ const features = [
 
 const Ecommerce = () => {
     return (
-        <div className="pt-32 pb-20 bg-bg-light min-h-screen">
+        <div className="pt-32 pb-20 bg-bg-light min-h-screen overflow-x-hidden">
             <SEO title="E-commerce Solutions" />
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
@@ -71,7 +71,7 @@ const Ecommerce = () => {
                             <p className="text-secondary text-lg font-light leading-relaxed mb-8">
                                 We choose the right tools for your specific business needs. From lightweight headless CMS to full-scale enterprise architectures.
                             </p>
-                            <ul className="grid grid-cols-2 gap-4">
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {['Shopify & Shopify Plus', 'WooCommerce', 'Custom MERN Stack', 'Headless Commerce', 'Payment Gateway Integration', 'Inventory Systems'].map((item, i) => (
                                     <li key={i} className="flex items-center text-sm font-bold text-primary">
                                         <Check size={16} className="text-accent mr-2" /> {item}

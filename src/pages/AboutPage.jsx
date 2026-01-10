@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const AboutPage = () => {
     return (
-        <div className="pt-32 pb-20 bg-bg-light min-h-screen">
+        <div className="pt-32 pb-20 bg-bg-light min-h-screen overflow-x-hidden">
             <SEO title="About" />
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24">

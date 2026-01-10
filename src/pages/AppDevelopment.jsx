@@ -28,7 +28,7 @@ const benefits = [
 
 const AppDevelopment = () => {
     return (
-        <div className="pt-32 pb-20 bg-bg-light min-h-screen">
+        <div className="pt-32 pb-20 bg-bg-light min-h-screen overflow-x-hidden">
             <SEO title="App Development" />
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
@@ -81,7 +81,7 @@ const AppDevelopment = () => {
                         <p className="text-secondary text-lg font-light leading-relaxed mb-8">
                             Our expertise spans across various domains, delivering specialized solutions that solve real-world problems.
                         </p>
-                        <div className="grid sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {['FinTech & Banking', 'Healthcare & Telemedicine', 'Education & E-Learning', 'On-Demand Services', 'Social Networking', 'Enterprise Management'].map((tag, i) => (
                                 <div key={i} className="flex items-center gap-3 p-4 border border-gray-100 bg-white hover:border-gold/30 transition-colors">
                                     <div className="w-2 h-2 bg-accent rounded-full"></div>
