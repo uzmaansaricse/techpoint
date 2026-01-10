@@ -1,27 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Linkedin, ArrowUpRight } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="bg-primary text-white pt-24 pb-12 border-t border-slate-800">
-            <div className="container mx-auto px-6 md:px-12 lg:px-24">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-20">
-                    {/* Company Info */}
-                    <div>
-                        <Link to="/" className="flex items-center space-x-3 mb-5 group">
-                            <div className="w-12 h-12 rounded-lg overflow-hidden flex items-center justify-center bg-white/5 shadow-md">
-                                <img src="/logo.jpeg" alt="AgencyX logo" loading="lazy" className="w-full h-full object-contain" />
+        <footer className="bg-primary text-white pt-24 pb-12 border-t border-white/5 relative overflow-hidden">
+            {/* Background Texture */}
+            <div className="absolute inset-0 opacity-5 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none"></div>
+
+            <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+                    {/* Brand Info */}
+                    <div className="space-y-6">
+                        <Link to="/" className="inline-block group">
+                            <div className="text-3xl font-display font-bold tracking-widest text-white transition-colors">
+                                TECH<span className="text-accent font-serif italic">Point</span>
                             </div>
-                            {/* <span className="text-lg font-semibold tracking-tight text-white">AgencyX</span> */}
                         </Link>
-                        <p className="text-slate-300 mb-6 leading-relaxed text-sm">
-                            We help brands grow and thrive in the digital era through product design, engineering and marketing.
+                        <p className="text-slate-400 leading-relaxed text-sm max-w-xs font-light">
+                            Elevating brands through premium digital craftsmanship. We build platforms that define industries.
                         </p>
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-4 pt-2">
                             {[Facebook, Twitter, Instagram, Linkedin].map((Icon, idx) => (
-                                <a key={idx} href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-accent hover:text-white transition-all transform hover:-translate-y-0.5 text-slate-300 shadow-sm">
-                                    <Icon size={18} />
+                                <a key={idx} href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-accent hover:border-accent hover:text-white transition-all duration-300 group">
+                                    <Icon size={16} className="text-slate-400 group-hover:text-white transition-colors" />
                                 </a>
                             ))}
                         </div>
@@ -29,12 +31,12 @@ const Footer = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-lg font-semibold mb-6 font-display">Quick Links</h4>
-                        <ul className="space-y-3">
+                        <h4 className="text-sm font-bold uppercase tracking-widest mb-8 text-accent">Explore</h4>
+                        <ul className="space-y-4">
                             {['Home', 'Services', 'Portfolio', 'Contact'].map((item) => (
                                 <li key={item}>
-                                    <Link to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} className="text-slate-400 hover:text-accent transition-colors flex items-center gap-2">
-                                        <span className="w-1.5 h-1.5 bg-accent/50 rounded-full opacity-0 hover:opacity-100 transition-opacity"></span>
+                                    <Link to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm group">
+                                        <span className="w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-4"></span>
                                         {item}
                                     </Link>
                                 </li>
@@ -44,11 +46,11 @@ const Footer = () => {
 
                     {/* Services */}
                     <div>
-                        <h4 className="text-lg font-semibold mb-6 font-display">Services</h4>
-                        <ul className="space-y-3">
+                        <h4 className="text-sm font-bold uppercase tracking-widest mb-8 text-accent">Expertise</h4>
+                        <ul className="space-y-4">
                             {['Web Development', 'Mobile Apps', 'E-commerce', 'UI/UX Design', 'SEO Optimization'].map((item) => (
                                 <li key={item}>
-                                    <Link to="/services" className="text-slate-400 hover:text-accent transition-colors">
+                                    <Link to="/services" className="text-slate-400 hover:text-white transition-colors text-sm hover:pl-2 duration-300 block">
                                         {item}
                                     </Link>
                                 </li>
@@ -58,21 +60,28 @@ const Footer = () => {
 
                     {/* Newsletter */}
                     <div>
-                        <h4 className="text-lg font-semibold mb-6 font-display">Newsletter</h4>
-                        <p className="text-slate-300 mb-4 text-sm">Subscribe to our newsletter to get product updates and design tips.</p>
-                        <form className="flex flex-col space-y-3" onSubmit={(e) => e.preventDefault()}>
-                            <input type="email" placeholder="Your email" className="bg-slate-800/40 text-white px-4 py-3 rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all placeholder:text-slate-400" />
-                            <button type="submit" className="bg-gradient-to-r from-accent to-blue-600 text-white px-4 py-3 rounded-lg font-semibold transition-transform shadow-md hover:-translate-y-0.5">
-                                Subscribe
+                        <h4 className="text-sm font-bold uppercase tracking-widest mb-8 text-accent">Stay Updated</h4>
+                        <p className="text-slate-400 mb-6 text-sm font-light">Join our exclusive network for the latest insights.</p>
+                        <form className="flex flex-col space-y-4" onSubmit={(e) => e.preventDefault()}>
+                            <div className="relative">
+                                <input type="email" placeholder="Email Address" className="w-full bg-white/5 text-white px-5 py-3 rounded-none border-b border-white/10 focus:border-accent focus:outline-none transition-all placeholder:text-slate-600 text-sm" />
+                            </div>
+                            <button type="submit" className="self-start text-xs font-bold uppercase tracking-widest text-white hover:text-accent transition-colors flex items-center gap-2 group">
+                                Subscribe <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <div className="border-t border-slate-800 pt-8 text-center">
-                    <p className="text-slate-500 text-sm">
-                        &copy; {new Date().getFullYear()}  All rights reserved.
+                <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-slate-500 text-xs tracking-wide">
+                        &copy; {new Date().getFullYear()} TechPoint. All rights reserved.
                     </p>
+                    <div className="flex gap-6 text-xs text-slate-500 uppercase tracking-wider">
+                        <a href="#" className="hover:text-accent transition-colors">Privacy</a>
+                        <a href="#" className="hover:text-accent transition-colors">Terms</a>
+                        <a href="#" className="hover:text-accent transition-colors">Sitemap</a>
+                    </div>
                 </div>
             </div>
         </footer>
