@@ -38,8 +38,8 @@ const Navbar = () => {
 	return (
 		<nav
 			className={`fixed w-full z-50 transition-all duration-500 ${scrolled
-					? 'bg-white/90 backdrop-blur-md shadow-glass py-3'
-					: 'bg-transparent py-5'
+				? 'bg-white/90 backdrop-blur-md shadow-glass py-3'
+				: 'bg-transparent py-5'
 				}`}
 		>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,9 +71,9 @@ const Navbar = () => {
 
 											{/* Dropdown Menu */}
 											<div
-												className={`absolute left-0 mt-2 w-56 bg-white rounded-none shadow-gold border-t-2 border-accent overflow-hidden transition-all duration-300 origin-top transform ${servicesOpen ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-0 scale-y-95 -translate-y-2 pointer-events-none'}`}
+												className={`absolute left-0 top-full pt-4 w-56 transition-all duration-300 transform origin-top ${servicesOpen ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-0 scale-y-95 -translate-y-2 pointer-events-none'}`}
 											>
-												<div className="py-2">
+												<div className="bg-white rounded-none shadow-gold border-t-2 border-accent overflow-hidden py-2">
 													{link.dropdown.map((item) => (
 														<NavLink
 															key={item.name}
