@@ -31,51 +31,44 @@ const Footer = () => {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-sm font-bold uppercase tracking-widest mb-8 text-accent">Explore</h4>
-                        <ul className="space-y-4">
-                            {['Home', 'Services', 'Portfolio', 'Contact'].map((item) => (
-                                <li key={item}>
-                                    <Link to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} className="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm group">
-                                        <span className="w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-4"></span>
-                                        {item}
-                                    </Link>
-                                </li>
-                            ))}
+                        <h4 className="text-sm font-bold uppercase tracking-widest text-accent mb-6">Explore</h4>
+                        <ul className="space-y-4 text-sm text-slate-400 font-light">
+                            <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                            <li><Link to="/services" className="hover:text-white transition-colors">Services</Link></li>
+                            <li><Link to="/top-projects" className="hover:text-white transition-colors">Portfolio</Link></li>
+                            <li><Link to="/career" className="hover:text-white transition-colors">Careers</Link></li>
+                            <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
                         </ul>
                     </div>
 
                     {/* Services */}
                     <div>
-                        <h4 className="text-sm font-bold uppercase tracking-widest mb-8 text-accent">Expertise</h4>
-                        <ul className="space-y-4">
-                            {['Web Development', 'Mobile Apps', 'E-commerce', 'UI/UX Design', 'SEO Optimization'].map((item) => (
-                                <li key={item}>
-                                    <Link to="/services" className="text-slate-400 hover:text-white transition-colors text-sm hover:pl-2 duration-300 block">
-                                        {item}
-                                    </Link>
-                                </li>
-                            ))}
+                        <h4 className="text-sm font-bold uppercase tracking-widest text-accent mb-6">Expertise</h4>
+                        <ul className="space-y-4 text-sm text-slate-400 font-light">
+                            <li><Link to="/services" className="hover:text-white transition-colors">Web Development</Link></li>
+                            <li><Link to="/services" className="hover:text-white transition-colors">App Development</Link></li>
+                            <li><Link to="/services" className="hover:text-white transition-colors">UI/UX Design</Link></li>
+                            <li><Link to="/services" className="hover:text-white transition-colors">SEO & Marketing</Link></li>
                         </ul>
                     </div>
 
-                    {/* Newsletter */}
+                    {/* Contact */}
                     <div>
-                        <h4 className="text-sm font-bold uppercase tracking-widest mb-8 text-accent">Stay Updated</h4>
-                        <p className="text-slate-400 mb-6 text-sm font-light">Join our exclusive network for the latest insights.</p>
-                        <form className="flex flex-col space-y-4" onSubmit={(e) => e.preventDefault()}>
-                            <div className="relative">
-                                <input type="email" placeholder="Email Address" className="w-full bg-white/5 text-white px-5 py-3 rounded-none border-b border-white/10 focus:border-accent focus:outline-none transition-all placeholder:text-slate-600 text-sm" />
-                            </div>
-                            <button type="submit" className="self-start text-xs font-bold uppercase tracking-widest text-white hover:text-accent transition-colors flex items-center gap-2 group">
-                                Subscribe <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </button>
-                        </form>
+                        <h4 className="text-sm font-bold uppercase tracking-widest text-accent mb-6">Visit Us</h4>
+                        <p className="text-slate-400 text-sm font-light leading-relaxed mb-4">
+                            Udyog Vihar Phase 4,<br />
+                            Gurugram, India 122015
+                        </p>
+                        <div className="text-slate-400 text-sm font-light">
+                            <p>+91 98765 43210</p>
+                            <p>hello@techpoint.in</p>
+                        </div>
                     </div>
                 </div>
 
                 <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-slate-500 text-xs tracking-wide">
-                        &copy; {new Date().getFullYear()} TechPoint. All rights reserved.
+                        &copy; {new Date().getFullYear()} TechPoint India. All rights reserved.
                     </p>
                     <div className="flex gap-6 text-xs text-slate-500 uppercase tracking-wider">
                         <a href="#" className="hover:text-accent transition-colors">Privacy</a>

@@ -5,13 +5,26 @@ const SEO = ({ title }) => {
     const location = useLocation();
 
     useEffect(() => {
-        document.title = title ? `${title} | Digital Agency` : 'Digital Agency';
+        const pageTitle = title ? `${title} | TechPoint India` : 'TechPoint India | Best Web Development Agency';
+        document.title = pageTitle;
 
-        // You can add favicon logic here if you want dynamic favicons, 
-        // but usually a static one in index.html is enough. 
-        // If strict requirement implies changing valid favicon per page:
-        // const link = document.querySelector("link[rel~='icon']");
-        // if (link) link.href = '/favicon-specific.ico'; 
+        // Meta Description Update
+        let metaDescription = document.querySelector("meta[name='description']");
+        if (!metaDescription) {
+            metaDescription = document.createElement('meta');
+            metaDescription.name = 'description';
+            document.head.appendChild(metaDescription);
+        }
+        metaDescription.content = "TechPoint India offers premium web design, SEO, and app development services in India. We build high-performance digital solutions for Indian and global brands.";
+
+        // Meta Keywords Update (Optional but requested)
+        let metaKeywords = document.querySelector("meta[name='keywords']");
+        if (!metaKeywords) {
+            metaKeywords = document.createElement('meta');
+            metaKeywords.name = 'keywords';
+            document.head.appendChild(metaKeywords);
+        }
+        metaKeywords.content = "Web Design India, SEO Company India, Mobile App Development Delhi, Best Web Developer Bangalore, Freelance Web Designer India, Luxury Web Design, TechPoint India";
 
     }, [location, title]);
 

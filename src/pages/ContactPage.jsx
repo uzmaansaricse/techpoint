@@ -37,21 +37,21 @@ const ContactPage = () => {
                             <ContactItem
                                 icon={<MapPin size={24} />}
                                 title="Studio"
-                                text="123 Business Avenue, Tech City, TC 90210"
+                                text="WorkFlo, Udyog Vihar Phase 4, Gurugram, India 122015"
                             />
 
                             {/* Email */}
                             <ContactItem
                                 icon={<Mail size={24} />}
                                 title="Email"
-                                text="hello@techpoint.com"
+                                text="hello@techpoint.in"
                             />
 
                             {/* Phone */}
                             <ContactItem
                                 icon={<Phone size={24} />}
                                 title="Phone"
-                                text="+1 (555) 123-4567"
+                                text="+91 98765 43210"
                             />
                         </div>
                     </div>
