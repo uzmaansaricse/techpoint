@@ -84,7 +84,7 @@ const AboutPage = () => {
 
                     <div className="relative h-[600px] w-full">
                         {/* Abstract Art Composition */}
-                        <div className="absolute top-0 right-0 w-4/5 h-full bg-white border border-gray-100 shadow-2xl p-2 z-10">
+                        <div className="absolute top-0 right-0 w-[90%] h-[90%] bg-white border border-gray-100 shadow-2xl p-2 z-0">
                             <div className="w-full h-full bg-gray-50 relative overflow-hidden flex items-center justify-center">
                                 <div className="absolute inset-0 opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
                                 <span className="text-[120px] font-display font-black text-primary/5 rotate-90 absolute right-[-40px]">TRUST</span>
@@ -94,9 +94,9 @@ const AboutPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="absolute bottom-10 left-0 w-3/5 h-3/5 bg-primary -z-0 p-8 flex flex-col justify-end">
-                            <div className="text-gold font-cursive text-4xl mb-2">Since 2023</div>
-                            <div className="text-white/60 text-sm font-light">Delivering excellence across borders.</div>
+                        <div className="absolute bottom-0 left-0 w-[45%] h-[45%] bg-primary z-10 p-10 flex flex-col justify-center shadow-2xl border-t border-r border-gold/20">
+                            <div className="text-gold font-cursive text-5xl mb-3">Since 2023</div>
+                            <div className="text-white/80 text-sm font-light leading-relaxed">Delivering digital excellence across borders with precision and passion.</div>
                         </div>
                     </div>
                 </div>
