@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
 const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 	const [servicesOpen, setServicesOpen] = useState(false);
+	const location = useLocation();
+	const isHomePage = location.pathname === '/';
+	const isDarkBg = scrolled || isHomePage;
+	const linkColor = isDarkBg ? 'text-gray-300 hover:text-white' : 'text-secondary hover:text-primary';
+	const logoColor = isDarkBg ? 'text-white' : 'text-primary';
+	const toggleColor = isDarkBg ? 'text-gray-300 hover:text-white' : 'text-primary hover:text-accent';
+	const accentColor = isDarkBg ? 'text-accent' : 'text-blue-600';
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -41,8 +48,8 @@ const Navbar = () => {
 				<div className="flex items-center justify-between h-16">
 					{/* Logo */}
 					<Link to="/" className="flex-shrink-0 flex items-center gap-2 group">
-						<div className="text-2xl font-display font-bold text-white tracking-widest group-hover:text-accent transition-colors">
-							TECH<span className="text-accent">POINT</span>
+						<div className={`text-2xl font-display font-bold tracking-widest group-hover:text-accent transition-colors ${logoColor}`}>
+							TECH<span className={accentColor}>POINT</span>
 						</div>
 					</Link>
 
@@ -58,7 +65,7 @@ const Navbar = () => {
 											onMouseLeave={() => setServicesOpen(false)}
 										>
 											<button
-												className="text-gray-300 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1"
+												className={`${isDarkBg ? 'text-gray-300 hover:text-accent' : 'text-secondary hover:text-accent'} px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1`}
 											>
 												{link.name}
 												<ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
@@ -91,7 +98,7 @@ const Navbar = () => {
 										<NavLink
 											to={link.path}
 											className={({ isActive }) =>
-												`text-sm font-medium transition-all duration-300 relative px-3 py-2 ${isActive ? 'text-accent' : 'text-gray-300 hover:text-white'
+												`text-sm font-medium transition-all duration-300 relative px-3 py-2 ${isActive ? accentColor : linkColor
 												}`
 											}
 										>
@@ -119,7 +126,7 @@ const Navbar = () => {
 					<div className="md:hidden">
 						<button
 							onClick={() => setIsOpen(!isOpen)}
-							className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-white/10 focus:outline-none transition-colors"
+							className={`inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition-colors ${toggleColor} ${isDarkBg ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
 						>
 							{isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
 						</button>
