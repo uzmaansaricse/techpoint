@@ -64,7 +64,7 @@ const WhyChooseMe = () => {
                     </div>
 
                     {/* Decorative Visual */}
-                    <div className="relative flex justify-center lg:justify-end">
+                    <div className="relative hidden lg:flex justify-center lg:justify-end">
                         {/* Image Frame */}
                         <div className="relative w-[400px] h-[500px] bg-white border border-gray-100 p-4 shadow-2xl skew-y-3 hover:skew-y-0 transition-all duration-700 ease-out">
                             <div className="absolute top-0 left-0 w-full h-full border border-gold/20 -m-4 -z-10 bg-gold/5"></div>

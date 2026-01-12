@@ -47,7 +47,7 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className={`fixed w-full z-50 transition-all duration-500 ${scrolled && !isOpen
+			className={`fixed w-full z-50 transition-all duration-[10ms] ${scrolled && !isOpen
 				? 'bg-white/90 backdrop-blur-md shadow-glass py-3'
 				: 'bg-transparent py-5'
 				}`}
@@ -143,7 +143,7 @@ const Navbar = () => {
 			</div>
 
 			{/* Mobile Menu */}
-			<div className={`xl:hidden fixed inset-0 z-[100] bg-white transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+			<div className={`xl:hidden fixed inset-0 z-[100] bg-white transition-transform duration-[10ms] ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
 				<div className="absolute top-5 right-5">
 					<button onClick={() => setIsOpen(false)} className="p-2 text-primary hover:text-accent">
 						<X className="w-8 h-8" />
