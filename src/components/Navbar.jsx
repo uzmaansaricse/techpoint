@@ -6,6 +6,7 @@ const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 	const [servicesOpen, setServicesOpen] = useState(false);
+	const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 	const location = useLocation();
 
 	// In the new Luxury Theme, we use a consistent "Light Glass" look
@@ -17,6 +18,15 @@ const Navbar = () => {
 		window.addEventListener('scroll', handleScroll);
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, []);
+
+	// Prevent scrolling when mobile menu is open
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'unset';
+		}
+	}, [isOpen]);
 
 	const navLinks = [
 		{ name: 'Home', path: '/' },
@@ -37,7 +47,7 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className={`fixed w-full z-50 transition-all duration-500 ${scrolled
+			className={`fixed w-full z-50 transition-all duration-500 ${scrolled && !isOpen
 				? 'bg-white/90 backdrop-blur-md shadow-glass py-3'
 				: 'bg-transparent py-5'
 				}`}
@@ -52,7 +62,7 @@ const Navbar = () => {
 					</Link>
 
 					{/* Desktop Navigation */}
-					<div className="hidden lg:block">
+					<div className="hidden xl:block">
 						<div className="ml-10 flex items-baseline space-x-10">
 							{navLinks.map((link) => (
 								<div key={link.name} className="relative group">
@@ -113,7 +123,7 @@ const Navbar = () => {
 					</div>
 
 					{/* CTA Button */}
-					<div className="hidden lg:block">
+					<div className="hidden xl:block">
 						<Link to="/contact" className="relative px-8 py-3 bg-primary text-white text-xs font-bold tracking-widest uppercase overflow-hidden group">
 							<span className="relative z-10 transition-colors duration-300 group-hover:text-primary">Get Started</span>
 							<div className="absolute inset-0 bg-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out"></div>
@@ -121,7 +131,7 @@ const Navbar = () => {
 					</div>
 
 					{/* Mobile menu button */}
-					<div className="lg:hidden">
+					<div className="xl:hidden">
 						<button
 							onClick={() => setIsOpen(!isOpen)}
 							className="inline-flex items-center justify-center p-2 text-primary hover:text-accent focus:outline-none transition-colors"
@@ -133,29 +143,40 @@ const Navbar = () => {
 			</div>
 
 			{/* Mobile Menu */}
-			<div className={`lg:hidden fixed inset-0 z-40 bg-white transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+			<div className={`xl:hidden fixed inset-0 z-[100] bg-white transition-transform duration-500 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
 				<div className="absolute top-5 right-5">
 					<button onClick={() => setIsOpen(false)} className="p-2 text-primary hover:text-accent">
 						<X className="w-8 h-8" />
 					</button>
 				</div>
 
-				<div className="flex flex-col items-center justify-center h-full space-y-8">
+				<div className="flex flex-col items-center justify-center h-full space-y-8 overflow-y-auto pb-10">
 					{navLinks.map((link) => (
 						<div key={link.name} className="w-full text-center">
 							{link.dropdown ? (
-								<div className="flex flex-col items-center gap-4">
-									<span className="text-2xl font-display font-bold text-gray-400 uppercase tracking-widest">{link.name}</span>
-									{link.dropdown.map(sub => (
-										<NavLink
-											key={sub.name}
-											to={sub.path}
-											onClick={() => setIsOpen(false)}
-											className={({ isActive }) => `text-lg ${isActive ? 'text-accent font-serif italic' : 'text-primary'}`}
-										>
-											{sub.name}
-										</NavLink>
-									))}
+								<div className="flex flex-col items-center">
+									<button
+										onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+										className={`text-3xl font-display font-bold uppercase tracking-widest transition-colors flex items-center justify-center gap-2 ${mobileServicesOpen ? 'text-accent' : 'text-primary'}`}
+									>
+										{link.name}
+										<ChevronDown className={`w-6 h-6 transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+									</button>
+
+									<div className={`overflow-hidden transition-all duration-500 ease-in-out ${mobileServicesOpen ? 'max-h-60 opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
+										<div className="flex flex-col items-center gap-4">
+											{link.dropdown.map(sub => (
+												<NavLink
+													key={sub.name}
+													to={sub.path}
+													onClick={() => setIsOpen(false)}
+													className={({ isActive }) => `text-xl font-medium tracking-wide transition-colors ${isActive ? 'text-accent font-serif italic' : 'text-secondary'}`}
+												>
+													{sub.name}
+												</NavLink>
+											))}
+										</div>
+									</div>
 								</div>
 							) : (
 								<NavLink
@@ -174,8 +195,8 @@ const Navbar = () => {
 						</div>
 					))}
 
-					<div className="pt-10">
-						<Link to="/contact" onClick={() => setIsOpen(false)} className="px-10 py-4 bg-primary text-white text-sm font-bold tracking-widest uppercase hover:bg-gold transition-colors">
+					<div className="pt-6">
+						<Link to="/contact" onClick={() => setIsOpen(false)} className="px-12 py-4 bg-primary text-white text-base font-bold tracking-widest uppercase hover:bg-gold transition-colors block">
 							Get Started
 						</Link>
 					</div>
