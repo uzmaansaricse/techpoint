@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -15,7 +17,11 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Sitemap from './pages/Sitemap';
 
+// Register GSAP plugins globally
+gsap.registerPlugin(ScrollTrigger);
+
 function App() {
+
   return (
     <Router>
       <div className="min-h-screen flex flex-col font-sans text-primary bg-bg-light">

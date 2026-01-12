@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SEO from '../components/SEO';
 import { Monitor, ShoppingCart, Smartphone, Search, Server, PenTool, ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const servicesList = [
     {
@@ -55,29 +58,75 @@ const servicesList = [
 ];
 
 const ServicesPage = () => {
+    const container = useRef(null);
+
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const tl = gsap.timeline();
+
+        // 1. Header Reveal
+        tl.from(".service-header-item", {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+
+        // 2. Services Grid Stagger
+        gsap.fromTo(".service-detail-card",
+            { y: 50, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".services-grid",
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+
+        // 3. CTA Reveal
+        gsap.from(".service-cta", {
+            scale: 0.9,
+            opacity: 0,
+            duration: 0.8,
+            scrollTrigger: {
+                trigger: ".service-cta",
+                start: "top 90%"
+            }
+        });
+
+    }, { scope: container });
+
     return (
-        <div className="pt-32 pb-24 bg-bg-light min-h-screen overflow-x-hidden">
+        <div ref={container} className="pt-32 pb-24 bg-bg-light min-h-screen overflow-x-hidden">
             <SEO title="Services" />
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
                 {/* Header */}
-                <div className="text-center mb-20 animate-fade-in max-w-3xl mx-auto">
-                    <span className="font-cursive text-4xl text-accent mb-4 block transform -rotate-2">
+                <div className="text-center mb-20 max-w-3xl mx-auto">
+                    <span className="service-header-item font-cursive text-4xl text-accent mb-4 block transform -rotate-2">
                         What We Offer
                     </span>
-                    <h1 className="text-4xl md:text-5xl font-display font-bold text-primary mb-6 leading-tight">
+                    <h1 className="service-header-item text-4xl md:text-5xl font-display font-bold text-primary mb-6 leading-tight">
                         Excellence in Every <br />
                         <span className="font-serif italic text-secondary">Pixel & Line of Code</span>
                     </h1>
-                    <p className="text-lg text-secondary mx-auto leading-relaxed font-light">
+                    <p className="service-header-item text-lg text-secondary mx-auto leading-relaxed font-light">
                         We provide end-to-end digital solutions, meticulously crafted to help your business thrive in the modern landscape.
                     </p>
                 </div>
 
                 {/* Services Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="services-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {servicesList.map((service, index) => (
-                        <div key={index} className="bg-white p-8 border border-gray-100 hover:border-gold/30 hover:shadow-gold transition-all duration-500 group relative flex flex-col">
+                        <div key={index} className="service-detail-card bg-white p-8 border border-gray-100 hover:border-gold/30 hover:shadow-gold transition-all duration-500 group relative flex flex-col">
                             {/* Top Badge */}
                             <div className="absolute top-0 right-0 bg-primary text-gold text-[10px] font-bold uppercase tracking-widest px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 {service.ideal}
@@ -115,7 +164,7 @@ const ServicesPage = () => {
                 </div>
 
                 {/* CTA Section */}
-                <div className="mt-32 text-center relative">
+                <div className="service-cta mt-32 text-center relative">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gold/5 blur-[100px] -z-10 rounded-full pointer-events-none"></div>
 
                     <h2 className="text-3xl md:text-5xl font-display font-bold text-primary mb-8">Ready to Elevate Your Brand?</h2>

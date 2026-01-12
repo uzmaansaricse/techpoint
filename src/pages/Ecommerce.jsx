@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SEO from '../components/SEO';
 import { ShoppingBag, CreditCard, BarChart2, ShieldCheck, ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const features = [
     {
@@ -27,32 +30,83 @@ const features = [
 ];
 
 const Ecommerce = () => {
+    const container = useRef(null);
+
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const tl = gsap.timeline();
+
+        // Header Reveal
+        tl.fromTo(".ecom-header-item",
+            { y: 30, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power2.out"
+            }
+        );
+
+        // Features Stagger
+        gsap.fromTo(".feature-card",
+            { y: 30, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: ".features-grid",
+                    start: "top 80%"
+                }
+            }
+        );
+
+        // Tech Stack Reveal
+        gsap.fromTo(".tech-stack-section",
+            { y: 50, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".tech-stack-section",
+                    start: "top 75%"
+                }
+            }
+        );
+
+    }, { scope: container });
+
     return (
-        <div className="pt-32 pb-20 bg-bg-light min-h-screen overflow-x-hidden">
+        <div ref={container} className="pt-32 pb-20 bg-bg-light min-h-screen overflow-x-hidden">
             <SEO title="E-commerce Solutions" />
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
 
                 {/* Hero Section */}
-                <div className="text-center mb-24 max-w-4xl mx-auto animate-fade-in relative">
+                <div className="text-center mb-24 max-w-4xl mx-auto relative">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold/5 rounded-full blur-3xl -z-10"></div>
-                    <span className="font-cursive text-4xl text-accent mb-4 block transform -rotate-3">
+                    <span className="ecom-header-item font-cursive text-4xl text-accent mb-4 block transform -rotate-3">
                         Online Growth
                     </span>
-                    <h1 className="text-5xl md:text-7xl font-display font-bold text-primary mb-8 leading-[1.1]">
+                    <h1 className="ecom-header-item text-5xl md:text-7xl font-display font-bold text-primary mb-8 leading-[1.1]">
                         Digital Stores That <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary">Sell & Scale</span>
                     </h1>
-                    <p className="text-xl text-secondary leading-relaxed max-w-3xl mx-auto font-light">
+                    <p className="ecom-header-item text-xl text-secondary leading-relaxed max-w-3xl mx-auto font-light">
                         We build robust, scalable, and high-converting e-commerce platforms.
                         Whether you need a custom MERN stack solution or a powered Shopify store, we deliver excellence.
                     </p>
                 </div>
 
                 {/* Features Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+                <div className="features-grid grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
                     {features.map((feature, idx) => (
-                        <div key={idx} className="bg-white p-8 border border-gray-100 group hover:border-gold/30 hover:shadow-gold transition-all duration-500">
+                        <div key={idx} className="feature-card bg-white p-8 border border-gray-100 group hover:border-gold/30 hover:shadow-gold transition-all duration-500">
                             <div className="w-14 h-14 bg-bg-light border border-gray-100 flex items-center justify-center text-primary mb-6 group-hover:border-gold group-hover:text-gold transition-all duration-500 shadow-sm group-hover:shadow-md">
                                 {feature.icon}
                             </div>
@@ -63,7 +117,7 @@ const Ecommerce = () => {
                 </div>
 
                 {/* Tech Stack / Platforms */}
-                <div className="bg-white border border-gray-100 p-12 lg:p-16 mb-24 relative overflow-hidden">
+                <div className="tech-stack-section bg-white border border-gray-100 p-12 lg:p-16 mb-24 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px]"></div>
                     <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
                         <div>

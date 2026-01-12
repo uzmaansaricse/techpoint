@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SEO from '../components/SEO';
 import { Smartphone, Layers, Cpu, Globe, ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const benefits = [
     {
@@ -27,32 +30,83 @@ const benefits = [
 ];
 
 const AppDevelopment = () => {
+    const container = useRef(null);
+
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const tl = gsap.timeline();
+
+        // Header Reveal
+        tl.fromTo(".app-header-item",
+            { y: 30, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power2.out"
+            }
+        );
+
+        // Benefits Stagger
+        gsap.fromTo(".benefit-card",
+            { y: 30, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: ".benefits-grid",
+                    start: "top 80%"
+                }
+            }
+        );
+
+        // Tech Stack Reveal
+        gsap.fromTo(".industries-section",
+            { y: 50, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".industries-section",
+                    start: "top 75%"
+                }
+            }
+        );
+
+    }, { scope: container });
+
     return (
-        <div className="pt-32 pb-20 bg-bg-light min-h-screen overflow-x-hidden">
+        <div ref={container} className="pt-32 pb-20 bg-bg-light min-h-screen overflow-x-hidden">
             <SEO title="App Development" />
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
 
                 {/* Hero Section */}
-                <div className="text-center mb-24 max-w-4xl mx-auto animate-fade-in relative">
+                <div className="text-center mb-24 max-w-4xl mx-auto relative">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold/5 rounded-full blur-3xl -z-10"></div>
-                    <span className="font-cursive text-4xl text-accent mb-4 block transform -rotate-3">
+                    <span className="app-header-item font-cursive text-4xl text-accent mb-4 block transform -rotate-3">
                         Mobile First
                     </span>
-                    <h1 className="text-5xl md:text-7xl font-display font-bold text-primary mb-8 leading-[1.1]">
+                    <h1 className="app-header-item text-5xl md:text-7xl font-display font-bold text-primary mb-8 leading-[1.1]">
                         Apps That Define <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary">The Future</span>
                     </h1>
-                    <p className="text-xl text-secondary leading-relaxed max-w-3xl mx-auto font-light">
+                    <p className="app-header-item text-xl text-secondary leading-relaxed max-w-3xl mx-auto font-light">
                         We craft high-performance mobile applications that engage users and drive business value.
                         From idea validation to App Store launch, we handle the entire lifecycle.
                     </p>
                 </div>
 
                 {/* Benefits Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+                <div className="benefits-grid grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
                     {benefits.map((item, idx) => (
-                        <div key={idx} className="bg-white p-8 border border-gray-100 group hover:border-gold/30 hover:shadow-gold transition-all duration-500">
+                        <div key={idx} className="benefit-card bg-white p-8 border border-gray-100 group hover:border-gold/30 hover:shadow-gold transition-all duration-500">
                             <div className="w-14 h-14 bg-bg-light border border-gray-100 flex items-center justify-center text-primary mb-6 group-hover:border-gold group-hover:text-gold transition-all duration-500 shadow-sm group-hover:shadow-md">
                                 {item.icon}
                             </div>
@@ -63,7 +117,7 @@ const AppDevelopment = () => {
                 </div>
 
                 {/* Industries */}
-                <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
+                <div className="industries-section grid lg:grid-cols-2 gap-16 items-center mb-32">
                     <div className="relative h-[500px] w-full bg-white border border-gray-100 p-4 shadow-2xl skew-y-1 hover:skew-y-0 transition-all duration-700">
                         <div className="absolute inset-0 bg-primary/5 -m-4 -z-10"></div>
                         <div className="w-full h-full bg-primary relative overflow-hidden flex items-center justify-center">

@@ -1,29 +1,74 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SEO from '../components/SEO';
 import { Mail, Clock, Code, ArrowRight } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const Career = () => {
+    const container = useRef(null);
+
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const tl = gsap.timeline();
+
+        // 1. Header Reveal
+        tl.from(".career-header-item", {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+
+        // 2. Status Card Reveal
+        gsap.from(".status-card", {
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".status-card",
+                start: "top 85%"
+            }
+        });
+
+        // 3. Opportunities
+        gsap.from(".opportunity-card", {
+            x: -30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".opportunities-grid",
+                start: "top 85%"
+            }
+        });
+
+    }, { scope: container });
+
     return (
-        <div className="pt-32 pb-20 bg-bg-light min-h-screen">
+        <div ref={container} className="pt-32 pb-20 bg-bg-light min-h-screen">
             <SEO title="Career" />
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24 max-w-7xl">
 
                 {/* Header */}
                 <div className="text-center mb-24 max-w-3xl mx-auto">
-                    <span className="font-cursive text-4xl text-accent mb-4 block transform -rotate-2">
+                    <span className="career-header-item font-cursive text-4xl text-accent mb-4 block transform -rotate-2">
                         Join Our Team
                     </span>
-                    <h1 className="text-4xl md:text-5xl font-display font-bold text-primary mb-6 leading-tight">
+                    <h1 className="career-header-item text-4xl md:text-5xl font-display font-bold text-primary mb-6 leading-tight">
                         Crafting the Future <br /> <span className="font-serif italic text-secondary">Together</span>
                     </h1>
-                    <p className="text-xl text-secondary mx-auto leading-relaxed font-light">
+                    <p className="career-header-item text-xl text-secondary mx-auto leading-relaxed font-light">
                         We believe in delivering world-class solutions through passion, precision, and a relentless pursuit of excellence.
                     </p>
                 </div>
 
                 {/* Status Card */}
-                <div className="bg-white p-12 lg:p-16 rounded-3xl text-center shadow-2xl border border-gray-100 mb-24 relative overflow-hidden max-w-4xl mx-auto">
+                <div className="status-card bg-white p-12 lg:p-16 rounded-3xl text-center shadow-2xl border border-gray-100 mb-24 relative overflow-hidden max-w-4xl mx-auto">
 
                     {/* Decorative Elements */}
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-bl-full"></div>
@@ -57,10 +102,10 @@ const Career = () => {
                         Future Opportunities
                     </h3>
 
-                    <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div className="opportunities-grid grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
                         {/* Card 1 */}
-                        <div className="bg-white p-8 border border-gray-100 flex items-center gap-6 hover:border-gold/30 hover:shadow-lg transition-all duration-300 group text-left">
+                        <div className="opportunity-card bg-white p-8 border border-gray-100 flex items-center gap-6 hover:border-gold/30 hover:shadow-lg transition-all duration-300 group text-left">
                             <div className="w-14 h-14 bg-bg-light text-primary flex items-center justify-center rounded-none transition-all duration-300 group-hover:border-gold group-hover:text-gold border border-transparent">
                                 <Code size={24} />
                             </div>
@@ -71,7 +116,7 @@ const Career = () => {
                         </div>
 
                         {/* Card 2 */}
-                        <div className="bg-white p-8 border border-gray-100 flex items-center gap-6 hover:border-gold/30 hover:shadow-lg transition-all duration-300 group text-left">
+                        <div className="opportunity-card bg-white p-8 border border-gray-100 flex items-center gap-6 hover:border-gold/30 hover:shadow-lg transition-all duration-300 group text-left">
                             <div className="w-14 h-14 bg-bg-light text-primary flex items-center justify-center rounded-none transition-all duration-300 group-hover:border-gold group-hover:text-gold border border-transparent">
                                 <Code size={24} />
                             </div>

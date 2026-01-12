@@ -1,29 +1,101 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SEO from '../components/SEO';
 import { Target, Users, Award, Briefcase, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+const statsData = [
+    { count: "50+", label: "Projects Delivered" },
+    { count: "3+", label: "Years Experience" },
+    { count: "100%", label: "Client Satisfaction" },
+    { count: "24/7", label: "Dedicated Support" }
+];
 
 const AboutPage = () => {
+    const container = useRef(null);
+
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const tl = gsap.timeline();
+
+        // Intro
+        tl.from(".animate-text", {
+            y: 30, // Reduced distance
+            opacity: 0,
+            duration: 0.8, // Faster intro
+            stagger: 0.1,
+            ease: "power3.out"
+        });
+
+        // Count Up Stats
+        const statElements = gsap.utils.toArray('.stat-number');
+        statsData.forEach((stat, i) => {
+            const targetElement = statElements[i];
+            const originalValue = stat.count; // Source of truth from data
+
+            const match = originalValue.match(/^([\d.]+)(.*)$/);
+            if (!match) return;
+
+            const endValue = parseFloat(match[1]);
+            const suffix = match[2] || '';
+
+            // Initial reset to ensure clean start
+            targetElement.innerText = "0" + suffix;
+
+            const counter = { val: 0 };
+
+            gsap.to(counter, {
+                val: endValue,
+                duration: 2, // Faster count up (was 2.5)
+                scrollTrigger: {
+                    trigger: targetElement,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                ease: "power2.out",
+                onUpdate: () => {
+                    targetElement.innerText = Math.floor(counter.val) + suffix;
+                }
+            });
+        });
+
+        // Values Stagger
+        gsap.from(".value-card", {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            scrollTrigger: {
+                trigger: ".values-grid",
+                start: "top 80%"
+            }
+        });
+
+    }, { scope: container });
+
     return (
-        <div className="pt-32 pb-20 bg-bg-light min-h-screen overflow-x-hidden">
+        <div ref={container} className="pt-32 pb-20 bg-bg-light min-h-screen overflow-x-hidden">
             <SEO title="About" />
 
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
 
                 {/* Intro Section */}
-                <div className="text-center mb-24 max-w-4xl mx-auto animate-fade-in relative">
+                <div className="text-center mb-24 max-w-4xl mx-auto relative">
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold/5 rounded-full blur-3xl -z-10"></div>
 
-                    <span className="font-cursive text-4xl text-accent mb-4 block transform -rotate-3">
+                    <span className="animate-text font-cursive text-4xl text-accent mb-4 block transform -rotate-3">
                         Our Story
                     </span>
 
-                    <h1 className="text-5xl md:text-7xl font-display font-bold text-primary mb-8 leading-[1.1]">
+                    <h1 className="animate-text text-5xl md:text-7xl font-display font-bold text-primary mb-8 leading-[1.1]">
                         Bridging Vision & <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary">Reality</span>
                     </h1>
 
-                    <p className="text-xl text-secondary leading-relaxed max-w-3xl mx-auto font-light">
+                    <p className="animate-text text-xl text-secondary leading-relaxed max-w-3xl mx-auto font-light">
                         We help businesses transform abstract ideas into powerful digital products.
                         With a focus on modern aesthetics, scalable architecture, and flawless execution,
                         we build legacies, not just websites.
@@ -32,14 +104,9 @@ const AboutPage = () => {
 
                 {/* Stats Section */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
-                    {[
-                        { count: "50+", label: "Projects Delivered" },
-                        { count: "3+", label: "Years Experience" },
-                        { count: "100%", label: "Client Satisfaction" },
-                        { count: "24/7", label: "Dedicated Support" }
-                    ].map((stat, i) => (
+                    {statsData.map((stat, i) => (
                         <div key={i} className="text-center p-8 bg-white border border-gray-100 hover:border-gold/30 hover:shadow-gold transition-all duration-500 group">
-                            <div className="text-5xl font-display font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-500">{stat.count}</div>
+                            <div className="stat-number text-5xl font-display font-bold text-primary mb-2 group-hover:scale-110 transition-transform duration-500">{stat.count}</div>
                             <div className="text-accent text-xs font-bold uppercase tracking-widest border-t border-gray-100 pt-4 inline-block group-hover:border-gold/50 transition-colors">
                                 {stat.label}
                             </div>

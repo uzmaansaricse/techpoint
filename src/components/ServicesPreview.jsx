@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Monitor, ShoppingCart, Smartphone, Search, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const services = [
     {
@@ -30,8 +33,32 @@ const services = [
 ];
 
 const ServicesPreview = () => {
+    const container = useRef(null);
+
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate cards securely
+        gsap.fromTo(".service-card",
+            { y: 50, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: container.current,
+                    start: "top 85%", // Trigger earlier
+                    end: "bottom center",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+
+    }, { scope: container });
+
     return (
-        <section className="py-32 bg-bg-light relative overflow-hidden">
+        <section ref={container} className="py-32 bg-bg-light relative overflow-hidden">
             {/* Minimalist Background */}
             <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none">
                 <svg viewBox="0 0 400 400" className="w-full h-full">
@@ -59,7 +86,7 @@ const ServicesPreview = () => {
                         <Link
                             to={service.link}
                             key={index}
-                            className="group bg-white p-10 h-full flex flex-col justify-between border border-gray-100 transition-all duration-500 hover:border-gold/50 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden"
+                            className="service-card group bg-white p-10 h-full flex flex-col justify-between border border-gray-100 transition-all duration-500 hover:border-gold/50 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden"
                         >
                             <div className="relative z-10">
                                 {/* Icon */}

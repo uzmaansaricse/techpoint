@@ -1,10 +1,40 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SEO from '../components/SEO';
 import { Mail, MapPin, Phone, Send, ArrowRight } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const ContactPage = () => {
+    const container = useRef(null);
+
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const tl = gsap.timeline();
+
+        // Left Content Reveal
+        tl.from(".contact-info-item", {
+            x: -30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power2.out"
+        });
+
+        // Form Reveal (Slide up)
+        gsap.from(".contact-form-container", {
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.5 // Wait slightly for left side
+        });
+
+    }, { scope: container });
+
     return (
-        <div className="pt-32 pb-24 bg-bg-light min-h-screen relative overflow-hidden">
+        <div ref={container} className="pt-32 pb-24 bg-bg-light min-h-screen relative overflow-hidden">
             {/* Background Decoration */}
             <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none">
                 <svg viewBox="0 0 100 100" className="w-full h-full">
@@ -18,46 +48,52 @@ const ContactPage = () => {
                 <div className="grid lg:grid-cols-2 gap-20 items-start">
 
                     {/* Left: Contact Info */}
-                    <div className="animate-fadeIn pt-8">
-                        <span className="font-cursive text-4xl text-accent mb-2 block transform -rotate-2">
+                    <div className="pt-8">
+                        <span className="contact-info-item font-cursive text-4xl text-accent mb-2 block transform -rotate-2">
                             Get In Touch
                         </span>
 
-                        <h1 className="text-4xl lg:text-6xl font-display font-bold text-primary leading-tight mb-8">
+                        <h1 className="contact-info-item text-4xl lg:text-6xl font-display font-bold text-primary leading-tight mb-8">
                             Let's Talk About <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary">Your Vision</span>
                         </h1>
 
-                        <p className="text-xl text-secondary mb-12 max-w-md leading-relaxed font-light">
+                        <p className="contact-info-item text-xl text-secondary mb-12 max-w-md leading-relaxed font-light">
                             Ready to start your next premium project? We are currently accepting new clients for 2026.
                         </p>
 
                         <div className="space-y-12">
                             {/* Address */}
-                            <ContactItem
-                                icon={<MapPin size={24} />}
-                                title="Studio"
-                                text="WorkFlo, Udyog Vihar Phase 4, Gurugram, India 122015"
-                            />
+                            <div className="contact-info-item">
+                                <ContactItem
+                                    icon={<MapPin size={24} />}
+                                    title="Studio"
+                                    text="WorkFlo, Udyog Vihar Phase 4, Gurugram, India 122015"
+                                />
+                            </div>
 
                             {/* Email */}
-                            <ContactItem
-                                icon={<Mail size={24} />}
-                                title="Email"
-                                text="hello@techpoint.in"
-                            />
+                            <div className="contact-info-item">
+                                <ContactItem
+                                    icon={<Mail size={24} />}
+                                    title="Email"
+                                    text="hello@techpoint.in"
+                                />
+                            </div>
 
                             {/* Phone */}
-                            <ContactItem
-                                icon={<Phone size={24} />}
-                                title="Phone"
-                                text="+91 98765 43210"
-                            />
+                            <div className="contact-info-item">
+                                <ContactItem
+                                    icon={<Phone size={24} />}
+                                    title="Phone"
+                                    text="+91 98765 43210"
+                                />
+                            </div>
                         </div>
                     </div>
 
                     {/* Right: Form */}
-                    <div className="bg-white p-10 md:p-14 shadow-2xl border border-gray-100 relative group">
+                    <div className="contact-form-container bg-white p-10 md:p-14 shadow-2xl border border-gray-100 relative group">
                         {/* Decorative Corner */}
                         <div className="absolute top-0 right-0 w-20 h-20 bg-gold/10 -z-10 group-hover:scale-150 transition-transform duration-700 rounded-bl-[100px]"></div>
 

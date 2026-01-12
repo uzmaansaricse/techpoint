@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SEO from '../components/SEO';
 import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const projects = [
     {
@@ -42,29 +45,64 @@ const projects = [
 ];
 
 const TopProjects = () => {
+    const container = useRef(null);
+
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const tl = gsap.timeline();
+
+        // Header Reveal
+        tl.from(".project-header-item", {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+
+        // Grid Stagger
+        gsap.fromTo(".project-card",
+            { y: 50, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".projects-grid",
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+
+    }, { scope: container });
+
     return (
-        <div className="pt-32 pb-28 bg-bg-light min-h-screen">
+        <div ref={container} className="pt-32 pb-28 bg-bg-light min-h-screen">
             <SEO title="Top Projects" />
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
                 {/* Header */}
                 <div className="text-center mb-20 max-w-3xl mx-auto">
-                    <span className="font-cursive text-4xl text-accent mb-4 block transform -rotate-2">
+                    <span className="project-header-item font-cursive text-4xl text-accent mb-4 block transform -rotate-2">
                         Portfolio
                     </span>
-                    <h1 className="text-4xl md:text-5xl font-display font-bold text-primary mb-6 leading-tight">
+                    <h1 className="project-header-item text-4xl md:text-5xl font-display font-bold text-primary mb-6 leading-tight">
                         Selected <span className="font-serif italic text-secondary">Works</span>
                     </h1>
-                    <p className="text-lg text-secondary mx-auto leading-relaxed font-light">
+                    <p className="project-header-item text-lg text-secondary mx-auto leading-relaxed font-light">
                         Explore some of our major work. We take pride in delivering robust and scalable solutions.
                     </p>
                 </div>
 
                 {/* Projects Grid */}
-                <div className="grid md:grid-cols-2 gap-12">
+                <div className="projects-grid grid md:grid-cols-2 gap-12">
                     {projects.map((project, index) => (
                         <div
                             key={index}
-                            className="group bg-white rounded-none border border-gray-100 overflow-hidden hover:border-gold/30 hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full"
+                            className="project-card group bg-white rounded-none border border-gray-100 overflow-hidden hover:border-gold/30 hover:shadow-2xl transition-all duration-500 relative flex flex-col h-full"
                         >
                             {/* Image Placeholder area */}
                             <div className={`h-80 w-full bg-gradient-to-br ${project.color} relative overflow-hidden flex items-center justify-center p-8 group-hover:scale-[1.02] transition-transform duration-700`}>

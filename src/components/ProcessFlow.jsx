@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Lightbulb, PenTool, Code, Rocket } from 'lucide-react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const steps = [
     {
@@ -29,8 +32,50 @@ const steps = [
 ];
 
 const ProcessFlow = () => {
+    const container = useRef(null);
+
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container.current,
+                start: "top 60%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // 1. Reveal Title
+        tl.from(".process-title", {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+
+        // 2. Animate Lines (Desktop)
+        tl.from(".process-line", {
+            scaleX: 0,
+            duration: 1,
+            ease: "power2.inOut",
+            transformOrigin: "left center",
+            stagger: 0.2
+        }, "-=0.4");
+
+        // 3. Pop in Steps
+        tl.from(".process-step", {
+            y: 50,
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "back.out(1.7)"
+        }, "-=1.2");
+
+    }, { scope: container });
+
     return (
-        <section className="py-24 bg-white relative overflow-hidden">
+        <section ref={container} className="py-24 bg-white relative overflow-hidden">
             {/* Background Decoration */}
             <div className="absolute inset-0 w-full h-full opacity-30 pointer-events-none">
                 <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
@@ -39,7 +84,7 @@ const ProcessFlow = () => {
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
 
                 {/* Title */}
-                <div className="text-center mb-20">
+                <div className="process-title text-center mb-20">
                     <span className="text-secondary font-serif italic text-lg mb-2 block">Our Methodology</span>
                     <h2 className="text-4xl lg:text-5xl font-display font-bold text-primary mb-4">
                         From Concept to <span className="text-accent underline decoration-gold/30 underline-offset-4 decoration-2">Reality</span>
@@ -52,7 +97,7 @@ const ProcessFlow = () => {
                         {steps.map((step, index) => (
                             <div
                                 key={index}
-                                className="flex flex-col items-center text-center group relative"
+                                className="process-step flex flex-col items-center text-center group relative"
                             >
                                 {/* Step Number */}
                                 <div className="absolute -top-12 text-6xl font-display font-bold text-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-150 select-none -z-10">
@@ -69,7 +114,7 @@ const ProcessFlow = () => {
 
                                 {/* Connectors (Mobile hidden, Desktop visible) */}
                                 {index !== steps.length - 1 && (
-                                    <div className="hidden lg:block absolute top-8 left-1/2 w-full h-[1px] bg-gold/20 -z-0"></div>
+                                    <div className="hidden lg:block absolute top-8 left-1/2 w-full h-[1px] bg-gold/20 -z-0 origin-left process-line"></div>
                                 )}
 
                                 {/* Title */}
